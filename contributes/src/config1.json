@@ -1,0 +1,3121 @@
+{
+    "staticExtensions": [
+        {
+            "packageJSON": {
+                "name": "cpp",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ./build/update-grammars.js"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "c",
+                            "extensions": [
+                                ".c",
+                                ".i"
+                            ],
+                            "aliases": [
+                                "C",
+                                "c"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        },
+                        {
+                            "id": "cpp",
+                            "extensions": [
+                                ".cpp",
+                                ".cc",
+                                ".cxx",
+                                ".c++",
+                                ".hpp",
+                                ".hh",
+                                ".hxx",
+                                ".h",
+                                ".ii",
+                                ".ino",
+                                ".inl",
+                                ".ipp",
+                                ".hpp.in",
+                                ".h.in"
+                            ],
+                            "aliases": [
+                                "C++",
+                                "Cpp",
+                                "cpp"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "c",
+                            "scopeName": "source.c",
+                            "path": "./syntaxes/c.tmLanguage.json"
+                        },
+                        {
+                            "language": "cpp",
+                            "scopeName": "source.cpp.embedded.macro",
+                            "path": "./syntaxes/cpp.embedded.macro.tmLanguage.json"
+                        },
+                        {
+                            "language": "cpp",
+                            "scopeName": "source.cpp",
+                            "path": "./syntaxes/cpp.tmLanguage.json"
+                        },
+                        {
+                            "scopeName": "source.c.platform",
+                            "path": "./syntaxes/platform.tmLanguage.json"
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "c",
+                            "path": "./snippets/c.code-snippets"
+                        },
+                        {
+                            "language": "cpp",
+                            "path": "./snippets/cpp.code-snippets"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/cpp"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "clojure",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js atom/language-clojure grammars/clojure.cson ./syntaxes/clojure.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "clojure",
+                            "aliases": [
+                                "Clojure",
+                                "clojure"
+                            ],
+                            "extensions": [
+                                ".clj",
+                                ".cljs",
+                                ".cljc",
+                                ".cljx",
+                                ".clojure",
+                                ".edn"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "clojure",
+                            "scopeName": "source.clojure",
+                            "path": "./syntaxes/clojure.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/clojure"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "bat",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js mmims/language-batchfile grammars/batchfile.cson ./syntaxes/batchfile.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "bat",
+                            "extensions": [
+                                ".bat",
+                                ".cmd"
+                            ],
+                            "aliases": [
+                                "Batch",
+                                "bat"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "bat",
+                            "scopeName": "source.batchfile",
+                            "path": "./syntaxes/batchfile.tmLanguage.json"
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "bat",
+                            "path": "./snippets/batchfile.code-snippets"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/bat"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "coffeescript",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js atom/language-coffee-script grammars/coffeescript.cson ./syntaxes/coffeescript.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "coffeescript",
+                            "extensions": [
+                                ".coffee",
+                                ".cson",
+                                ".iced"
+                            ],
+                            "aliases": [
+                                "CoffeeScript",
+                                "coffeescript",
+                                "coffee"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "coffeescript",
+                            "scopeName": "source.coffee",
+                            "path": "./syntaxes/coffeescript.tmLanguage.json"
+                        }
+                    ],
+                    "breakpoints": [
+                        {
+                            "language": "coffeescript"
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "coffeescript",
+                            "path": "./snippets/coffeescript.code-snippets"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/coffeescript"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "csharp",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "0.10.x"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js dotnet/csharp-tmLanguage grammars/csharp.tmLanguage ./syntaxes/csharp.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "csharp",
+                            "extensions": [
+                                ".cs",
+                                ".csx",
+                                ".cake"
+                            ],
+                            "aliases": [
+                                "C#",
+                                "csharp"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "csharp",
+                            "scopeName": "source.cs",
+                            "path": "./syntaxes/csharp.tmLanguage.json"
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "csharp",
+                            "path": "./snippets/csharp.code-snippets"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/csharp"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "css",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "0.10.x"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js octref/language-css grammars/css.cson ./syntaxes/css.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "css",
+                            "aliases": [
+                                "CSS",
+                                "css"
+                            ],
+                            "extensions": [
+                                ".css"
+                            ],
+                            "mimetypes": [
+                                "text/css"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "css",
+                            "scopeName": "source.css",
+                            "path": "./syntaxes/css.tmLanguage.json",
+                            "tokenTypes": {
+                                "meta.function.url string.quoted": "other"
+                            }
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/css"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "docker",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js moby/moby contrib/syntax/textmate/Docker.tmbundle/Syntaxes/Dockerfile.tmLanguage ./syntaxes/docker.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "dockerfile",
+                            "extensions": [
+                                ".dockerfile"
+                            ],
+                            "filenames": [
+                                "Dockerfile"
+                            ],
+                            "aliases": [
+                                "Dockerfile"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "dockerfile",
+                            "scopeName": "source.dockerfile",
+                            "path": "./syntaxes/docker.tmLanguage.json"
+                        }
+                    ],
+                    "configurationDefaults": {
+                        "[dockerfile]": {
+                            "editor.quickSuggestions": {
+                                "strings": true
+                            }
+                        }
+                    }
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/docker"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "fsharp",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js ionide/ionide-fsgrammar grammar/fsharp.json ./syntaxes/fsharp.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "fsharp",
+                            "extensions": [
+                                ".fs",
+                                ".fsi",
+                                ".fsx",
+                                ".fsscript"
+                            ],
+                            "aliases": [
+                                "F#",
+                                "FSharp",
+                                "fsharp"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "fsharp",
+                            "scopeName": "source.fsharp",
+                            "path": "./syntaxes/fsharp.tmLanguage.json"
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "fsharp",
+                            "path": "./snippets/fsharp.code-snippets"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/fsharp"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "go",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js jeff-hykin/better-go-syntax source/generated.tmLanguage.json ./syntaxes/go.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "go",
+                            "extensions": [
+                                ".go"
+                            ],
+                            "aliases": [
+                                "Go"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "go",
+                            "scopeName": "source.go",
+                            "path": "./syntaxes/go.tmLanguage.json"
+                        }
+                    ],
+                    "configurationDefaults": {
+                        "[go]": {
+                            "editor.insertSpaces": false
+                        }
+                    }
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/go"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "hlsl",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js tgjones/shaders-tmLanguage grammars/hlsl.json ./syntaxes/hlsl.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "hlsl",
+                            "extensions": [
+                                ".hlsl",
+                                ".hlsli",
+                                ".fx",
+                                ".fxh",
+                                ".vsh",
+                                ".psh",
+                                ".cginc",
+                                ".compute"
+                            ],
+                            "aliases": [
+                                "HLSL",
+                                "hlsl"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "hlsl",
+                            "path": "./syntaxes/hlsl.tmLanguage.json",
+                            "scopeName": "source.hlsl"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/hlsl"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "groovy",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js textmate/groovy.tmbundle Syntaxes/Groovy.tmLanguage ./syntaxes/groovy.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "groovy",
+                            "aliases": [
+                                "Groovy",
+                                "groovy"
+                            ],
+                            "extensions": [
+                                ".groovy",
+                                ".gvy",
+                                ".gradle"
+                            ],
+                            "filenames": [
+                                "Jenkinsfile"
+                            ],
+                            "firstLine": "^#!.*\\bgroovy\\b",
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "groovy",
+                            "scopeName": "source.groovy",
+                            "path": "./syntaxes/groovy.tmLanguage.json"
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "groovy",
+                            "path": "./snippets/groovy.code-snippets"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/groovy"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "html",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "0.10.x"
+                },
+                "scripts": {
+                    "update-grammar": "node ./build/update-grammar.js"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "html",
+                            "extensions": [
+                                ".html",
+                                ".htm",
+                                ".shtml",
+                                ".xhtml",
+                                ".mdoc",
+                                ".jsp",
+                                ".asp",
+                                ".aspx",
+                                ".jshtm",
+                                ".volt",
+                                ".ejs",
+                                ".rhtml"
+                            ],
+                            "aliases": [
+                                "HTML",
+                                "htm",
+                                "html",
+                                "xhtml"
+                            ],
+                            "mimetypes": [
+                                "text/html",
+                                "text/x-jshtm",
+                                "text/template",
+                                "text/ng-template",
+                                "application/xhtml+xml"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "scopeName": "text.html.basic",
+                            "path": "./syntaxes/html.tmLanguage.json",
+                            "embeddedLanguages": {
+                                "text.html": "html",
+                                "source.css": "css",
+                                "source.js": "javascript",
+                                "source.python": "python",
+                                "source.smarty": "smarty"
+                            },
+                            "tokenTypes": {
+                                "meta.tag string.quoted": "other"
+                            }
+                        },
+                        {
+                            "language": "html",
+                            "scopeName": "text.html.derivative",
+                            "path": "./syntaxes/html-derivative.tmLanguage.json",
+                            "embeddedLanguages": {
+                                "text.html": "html",
+                                "source.css": "css",
+                                "source.js": "javascript",
+                                "source.python": "python",
+                                "source.smarty": "smarty"
+                            },
+                            "tokenTypes": {
+                                "meta.tag string.quoted": "other"
+                            }
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/html"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "handlebars",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "0.10.x"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js daaain/Handlebars grammars/Handlebars.json ./syntaxes/Handlebars.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "handlebars",
+                            "extensions": [
+                                ".handlebars",
+                                ".hbs",
+                                ".hjs"
+                            ],
+                            "aliases": [
+                                "Handlebars",
+                                "handlebars"
+                            ],
+                            "mimetypes": [
+                                "text/x-handlebars-template"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "handlebars",
+                            "scopeName": "text.html.handlebars",
+                            "path": "./syntaxes/Handlebars.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/handlebars"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "java",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js atom/language-java grammars/java.cson ./syntaxes/java.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "java",
+                            "extensions": [
+                                ".java",
+                                ".jav"
+                            ],
+                            "aliases": [
+                                "Java",
+                                "java"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "java",
+                            "scopeName": "source.java",
+                            "path": "./syntaxes/java.tmLanguage.json"
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "java",
+                            "path": "./snippets/java.code-snippets"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/java"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "javascript",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "0.10.x"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "javascriptreact",
+                            "aliases": [
+                                "JavaScript React",
+                                "jsx"
+                            ],
+                            "extensions": [
+                                ".jsx"
+                            ],
+                            "configuration": "./javascript-language-configuration.json"
+                        },
+                        {
+                            "id": "javascript",
+                            "aliases": [
+                                "JavaScript",
+                                "javascript",
+                                "js"
+                            ],
+                            "extensions": [
+                                ".js",
+                                ".es6",
+                                ".mjs",
+                                ".cjs",
+                                ".pac"
+                            ],
+                            "filenames": [
+                                "jakefile"
+                            ],
+                            "firstLine": "^#!.*\\bnode",
+                            "mimetypes": [
+                                "text/javascript"
+                            ],
+                            "configuration": "./javascript-language-configuration.json"
+                        },
+                        {
+                            "id": "jsx-tags",
+                            "aliases": [],
+                            "configuration": "./tags-language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "javascriptreact",
+                            "scopeName": "source.js.jsx",
+                            "path": "./syntaxes/JavaScriptReact.tmLanguage.json",
+                            "embeddedLanguages": {
+                                "meta.tag.js": "jsx-tags",
+                                "meta.tag.without-attributes.js": "jsx-tags",
+                                "meta.tag.attributes.js.jsx": "javascriptreact",
+                                "meta.embedded.expression.js": "javascriptreact"
+                            },
+                            "tokenTypes": {
+                                "entity.name.type.instance.jsdoc": "other",
+                                "entity.name.function.tagged-template": "other",
+                                "meta.import string.quoted": "other",
+                                "variable.other.jsdoc": "other"
+                            }
+                        },
+                        {
+                            "language": "javascript",
+                            "scopeName": "source.js",
+                            "path": "./syntaxes/JavaScript.tmLanguage.json",
+                            "embeddedLanguages": {
+                                "meta.tag.js": "jsx-tags",
+                                "meta.tag.without-attributes.js": "jsx-tags",
+                                "meta.tag.attributes.js": "javascript",
+                                "meta.embedded.expression.js": "javascript"
+                            },
+                            "tokenTypes": {
+                                "entity.name.type.instance.jsdoc": "other",
+                                "entity.name.function.tagged-template": "other",
+                                "meta.import string.quoted": "other",
+                                "variable.other.jsdoc": "other"
+                            }
+                        },
+                        {
+                            "scopeName": "source.js.regexp",
+                            "path": "./syntaxes/Regular Expressions (JavaScript).tmLanguage"
+                        }
+                    ],
+                    "semanticTokenScopes": [
+                        {
+                            "language": "javascript",
+                            "scopes": {
+                                "property": [
+                                    "variable.other.property.js"
+                                ],
+                                "property.readonly": [
+                                    "variable.other.constant.property.js"
+                                ],
+                                "variable": [
+                                    "variable.other.readwrite.js"
+                                ],
+                                "variable.readonly": [
+                                    "variable.other.constant.object.js"
+                                ],
+                                "function": [
+                                    "entity.name.function.js"
+                                ],
+                                "namespace": [
+                                    "entity.name.type.module.js"
+                                ],
+                                "variable.defaultLibrary": [
+                                    "support.variable.js"
+                                ],
+                                "function.defaultLibrary": [
+                                    "support.function.js"
+                                ]
+                            }
+                        },
+                        {
+                            "language": "javascriptreact",
+                            "scopes": {
+                                "property": [
+                                    "variable.other.property.jsx"
+                                ],
+                                "property.readonly": [
+                                    "variable.other.constant.property.jsx"
+                                ],
+                                "variable": [
+                                    "variable.other.readwrite.jsx"
+                                ],
+                                "variable.readonly": [
+                                    "variable.other.constant.object.jsx"
+                                ],
+                                "function": [
+                                    "entity.name.function.jsx"
+                                ],
+                                "namespace": [
+                                    "entity.name.type.module.jsx"
+                                ],
+                                "variable.defaultLibrary": [
+                                    "support.variable.js"
+                                ],
+                                "function.defaultLibrary": [
+                                    "support.function.js"
+                                ]
+                            }
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "javascript",
+                            "path": "./snippets/javascript.code-snippets"
+                        },
+                        {
+                            "language": "javascriptreact",
+                            "path": "./snippets/javascript.code-snippets"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/javascript"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "ini",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js textmate/ini.tmbundle Syntaxes/Ini.plist ./syntaxes/ini.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "ini",
+                            "extensions": [
+                                ".ini"
+                            ],
+                            "aliases": [
+                                "Ini",
+                                "ini"
+                            ],
+                            "configuration": "./ini.language-configuration.json"
+                        },
+                        {
+                            "id": "properties",
+                            "extensions": [
+                                ".properties",
+                                ".cfg",
+                                ".conf",
+                                ".directory"
+                            ],
+                            "filenames": [
+                                ".gitattributes",
+                                ".gitconfig",
+                                "gitconfig",
+                                ".gitmodules",
+                                ".editorconfig"
+                            ],
+                            "filenamePatterns": [
+                                "**/.config/git/config",
+                                "**/.git/config"
+                            ],
+                            "aliases": [
+                                "Properties",
+                                "properties"
+                            ],
+                            "configuration": "./properties.language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "ini",
+                            "scopeName": "source.ini",
+                            "path": "./syntaxes/ini.tmLanguage.json"
+                        },
+                        {
+                            "language": "properties",
+                            "scopeName": "source.ini",
+                            "path": "./syntaxes/ini.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/ini"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "json",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "0.10.x"
+                },
+                "scripts": {
+                    "update-grammar": "node ./build/update-grammars.js"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "json",
+                            "aliases": [
+                                "JSON",
+                                "json"
+                            ],
+                            "extensions": [
+                                ".json",
+                                ".bowerrc",
+                                ".jscsrc",
+                                ".webmanifest",
+                                ".js.map",
+                                ".css.map",
+                                ".har",
+                                ".jslintrc",
+                                ".jsonld"
+                            ],
+                            "filenames": [
+                                "composer.lock",
+                                ".watchmanconfig",
+                                ".ember-cli"
+                            ],
+                            "mimetypes": [
+                                "application/json",
+                                "application/manifest+json"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        },
+                        {
+                            "id": "jsonc",
+                            "aliases": [
+                                "JSON with Comments"
+                            ],
+                            "extensions": [
+                                ".hintrc",
+                                ".babelrc",
+                                ".jsonc",
+                                ".eslintrc",
+                                ".eslintrc.json",
+                                ".jsfmtrc",
+                                ".jshintrc",
+                                ".swcrc"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "json",
+                            "scopeName": "source.json",
+                            "path": "./syntaxes/JSON.tmLanguage.json"
+                        },
+                        {
+                            "language": "jsonc",
+                            "scopeName": "source.json.comments",
+                            "path": "./syntaxes/JSONC.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/json"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "log",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js emilast/vscode-logfile-highlighter syntaxes/log.tmLanguage ./syntaxes/log.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "log",
+                            "extensions": [
+                                ".log",
+                                "*.log.?"
+                            ],
+                            "aliases": [
+                                "Log"
+                            ]
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "log",
+                            "scopeName": "text.log",
+                            "path": "./syntaxes/log.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/log"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "less",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js atom/language-less grammars/less.cson ./syntaxes/less.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "less",
+                            "aliases": [
+                                "Less",
+                                "less"
+                            ],
+                            "extensions": [
+                                ".less"
+                            ],
+                            "mimetypes": [
+                                "text/x-less",
+                                "text/less"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "less",
+                            "scopeName": "source.css.less",
+                            "path": "./syntaxes/less.tmLanguage.json"
+                        }
+                    ],
+                    "problemMatchers": [
+                        {
+                            "name": "lessc",
+                            "label": "Lessc compiler",
+                            "owner": "lessc",
+                            "source": "less",
+                            "fileLocation": "absolute",
+                            "pattern": {
+                                "regexp": "(.*)\\sin\\s(.*)\\son line\\s(\\d+),\\scolumn\\s(\\d+)",
+                                "message": 1,
+                                "file": 2,
+                                "line": 3,
+                                "column": 4
+                            }
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/less"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "lua",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js textmate/lua.tmbundle Syntaxes/Lua.plist ./syntaxes/lua.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "lua",
+                            "extensions": [
+                                ".lua"
+                            ],
+                            "aliases": [
+                                "Lua",
+                                "lua"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "lua",
+                            "scopeName": "source.lua",
+                            "path": "./syntaxes/lua.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/lua"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "make",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js fadeevab/make.tmbundle Syntaxes/Makefile.plist ./syntaxes/make.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "makefile",
+                            "aliases": [
+                                "Makefile",
+                                "makefile"
+                            ],
+                            "extensions": [
+                                ".mk"
+                            ],
+                            "filenames": [
+                                "Makefile",
+                                "makefile",
+                                "GNUmakefile",
+                                "OCamlMakefile"
+                            ],
+                            "firstLine": "^#!\\s*/usr/bin/make",
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "makefile",
+                            "scopeName": "source.makefile",
+                            "path": "./syntaxes/make.tmLanguage.json",
+                            "tokenTypes": {
+                                "string.interpolated": "other"
+                            }
+                        }
+                    ],
+                    "configurationDefaults": {
+                        "[makefile]": {
+                            "editor.insertSpaces": false
+                        }
+                    }
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/make"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "markdown",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "^1.20.0"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "markdown",
+                            "aliases": [
+                                "Markdown",
+                                "markdown"
+                            ],
+                            "extensions": [
+                                ".md",
+                                ".mkd",
+                                ".mdwn",
+                                ".mdown",
+                                ".markdown",
+                                ".markdn",
+                                ".mdtxt",
+                                ".mdtext",
+                                ".workbook"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "markdown",
+                            "scopeName": "text.html.markdown",
+                            "path": "./syntaxes/markdown.tmLanguage.json",
+                            "embeddedLanguages": {
+                                "meta.embedded.block.html": "html",
+                                "source.js": "javascript",
+                                "source.css": "css",
+                                "meta.embedded.block.frontmatter": "yaml",
+                                "meta.embedded.block.css": "css",
+                                "meta.embedded.block.ini": "ini",
+                                "meta.embedded.block.java": "java",
+                                "meta.embedded.block.lua": "lua",
+                                "meta.embedded.block.makefile": "makefile",
+                                "meta.embedded.block.perl": "perl",
+                                "meta.embedded.block.r": "r",
+                                "meta.embedded.block.ruby": "ruby",
+                                "meta.embedded.block.php": "php",
+                                "meta.embedded.block.sql": "sql",
+                                "meta.embedded.block.vs_net": "vs_net",
+                                "meta.embedded.block.xml": "xml",
+                                "meta.embedded.block.xsl": "xsl",
+                                "meta.embedded.block.yaml": "yaml",
+                                "meta.embedded.block.dosbatch": "dosbatch",
+                                "meta.embedded.block.clojure": "clojure",
+                                "meta.embedded.block.coffee": "coffee",
+                                "meta.embedded.block.c": "c",
+                                "meta.embedded.block.cpp": "cpp",
+                                "meta.embedded.block.diff": "diff",
+                                "meta.embedded.block.dockerfile": "dockerfile",
+                                "meta.embedded.block.go": "go",
+                                "meta.embedded.block.groovy": "groovy",
+                                "meta.embedded.block.pug": "jade",
+                                "meta.embedded.block.javascript": "javascript",
+                                "meta.embedded.block.json": "json",
+                                "meta.embedded.block.less": "less",
+                                "meta.embedded.block.objc": "objc",
+                                "meta.embedded.block.scss": "scss",
+                                "meta.embedded.block.perl6": "perl6",
+                                "meta.embedded.block.powershell": "powershell",
+                                "meta.embedded.block.python": "python",
+                                "meta.embedded.block.rust": "rust",
+                                "meta.embedded.block.scala": "scala",
+                                "meta.embedded.block.shellscript": "shellscript",
+                                "meta.embedded.block.typescript": "typescript",
+                                "meta.embedded.block.typescriptreact": "typescriptreact",
+                                "meta.embedded.block.csharp": "csharp",
+                                "meta.embedded.block.fsharp": "fsharp"
+                            }
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "markdown",
+                            "path": "./snippets/markdown.code-snippets"
+                        }
+                    ]
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js microsoft/vscode-markdown-tm-grammar syntaxes/markdown.tmLanguage ./syntaxes/markdown.tmLanguage.json"
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/markdown-basics"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "php",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "0.10.x"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "php",
+                            "extensions": [
+                                ".php",
+                                ".php4",
+                                ".php5",
+                                ".phtml",
+                                ".ctp"
+                            ],
+                            "aliases": [
+                                "PHP",
+                                "php"
+                            ],
+                            "firstLine": "^#!\\s*/.*\\bphp\\b",
+                            "mimetypes": [
+                                "application/x-php"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "php",
+                            "scopeName": "source.php",
+                            "path": "./syntaxes/php.tmLanguage.json"
+                        },
+                        {
+                            "language": "php",
+                            "scopeName": "text.html.php",
+                            "path": "./syntaxes/html.tmLanguage.json",
+                            "embeddedLanguages": {
+                                "text.html": "html",
+                                "source.php": "php",
+                                "source.sql": "sql",
+                                "text.xml": "xml",
+                                "source.js": "javascript",
+                                "source.json": "json",
+                                "source.css": "css"
+                            }
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "php",
+                            "path": "./snippets/php.code-snippets"
+                        }
+                    ]
+                },
+                "scripts": {
+                    "update-grammar": "node ./build/update-grammar.js"
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/php"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "perl",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js textmate/perl.tmbundle Syntaxes/Perl.plist ./syntaxes/perl.tmLanguage.json Syntaxes/Perl%206.tmLanguage ./syntaxes/perl6.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "perl",
+                            "aliases": [
+                                "Perl",
+                                "perl"
+                            ],
+                            "extensions": [
+                                ".pl",
+                                ".pm",
+                                ".pod",
+                                ".t",
+                                ".PL",
+                                ".psgi"
+                            ],
+                            "firstLine": "^#!.*\\bperl\\b",
+                            "configuration": "./perl.language-configuration.json"
+                        },
+                        {
+                            "id": "perl6",
+                            "aliases": [
+                                "Perl 6",
+                                "perl6"
+                            ],
+                            "extensions": [
+                                ".p6",
+                                ".pl6",
+                                ".pm6",
+                                ".nqp"
+                            ],
+                            "firstLine": "(^#!.*\\bperl6\\b)|use\\s+v6",
+                            "configuration": "./perl6.language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "perl",
+                            "scopeName": "source.perl",
+                            "path": "./syntaxes/perl.tmLanguage.json"
+                        },
+                        {
+                            "language": "perl6",
+                            "scopeName": "source.perl.6",
+                            "path": "./syntaxes/perl6.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/perl"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "objective-c",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ./build/update-grammars.js"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "objective-c",
+                            "extensions": [
+                                ".m"
+                            ],
+                            "aliases": [
+                                "Objective-C"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        },
+                        {
+                            "id": "objective-cpp",
+                            "extensions": [
+                                ".mm"
+                            ],
+                            "aliases": [
+                                "Objective-C++"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "objective-c",
+                            "scopeName": "source.objc",
+                            "path": "./syntaxes/objective-c.tmLanguage.json"
+                        },
+                        {
+                            "language": "objective-cpp",
+                            "scopeName": "source.objcpp",
+                            "path": "./syntaxes/objective-c++.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/objective-c"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "pug",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js davidrios/pug-tmbundle Syntaxes/Pug.JSON-tmLanguage ./syntaxes/pug.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "jade",
+                            "extensions": [
+                                ".jade",
+                                ".pug"
+                            ],
+                            "aliases": [
+                                "Pug",
+                                "Jade",
+                                "jade"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "jade",
+                            "scopeName": "text.pug",
+                            "path": "./syntaxes/pug.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/pug"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "rust",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js zargony/atom-language-rust grammars/rust.cson ./syntaxes/rust.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "rust",
+                            "extensions": [
+                                ".rs"
+                            ],
+                            "aliases": [
+                                "Rust",
+                                "rust"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "rust",
+                            "path": "./syntaxes/rust.tmLanguage.json",
+                            "scopeName": "source.rust"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/rust"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "powershell",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "powershell",
+                            "extensions": [
+                                ".ps1",
+                                ".psm1",
+                                ".psd1",
+                                ".pssc",
+                                ".psrc"
+                            ],
+                            "aliases": [
+                                "PowerShell",
+                                "powershell",
+                                "ps",
+                                "ps1"
+                            ],
+                            "firstLine": "^#!\\s*/.*\\bpwsh\\b",
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "powershell",
+                            "scopeName": "source.powershell",
+                            "path": "./syntaxes/powershell.tmLanguage.json"
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "powershell",
+                            "path": "./snippets/powershell.code-snippets"
+                        }
+                    ]
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js PowerShell/EditorSyntax PowerShellSyntax.tmLanguage ./syntaxes/powershell.tmLanguage.json"
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/powershell"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "ruby",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js textmate/ruby.tmbundle Syntaxes/Ruby.plist ./syntaxes/ruby.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "ruby",
+                            "extensions": [
+                                ".rb",
+                                ".rbx",
+                                ".rjs",
+                                ".gemspec",
+                                ".rake",
+                                ".ru",
+                                ".erb",
+                                ".podspec",
+                                ".rbi"
+                            ],
+                            "filenames": [
+                                "rakefile",
+                                "gemfile",
+                                "guardfile",
+                                "podfile",
+                                "capfile"
+                            ],
+                            "aliases": [
+                                "Ruby",
+                                "rb"
+                            ],
+                            "firstLine": "^#!\\s*/.*\\bruby\\b",
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "ruby",
+                            "scopeName": "source.ruby",
+                            "path": "./syntaxes/ruby.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/ruby"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "r",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js Ikuyadeu/vscode-R syntax/r.json ./syntaxes/r.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "r",
+                            "extensions": [
+                                ".r",
+                                ".rhistory",
+                                ".rprofile",
+                                ".rt"
+                            ],
+                            "aliases": [
+                                "R",
+                                "r"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "r",
+                            "scopeName": "source.r",
+                            "path": "./syntaxes/r.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/r"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "razor",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "0.10.x"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js demyte/language-cshtml grammars/cshtml.json ./syntaxes/cshtml.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "razor",
+                            "extensions": [
+                                ".cshtml"
+                            ],
+                            "aliases": [
+                                "Razor",
+                                "razor"
+                            ],
+                            "mimetypes": [
+                                "text/x-cshtml"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "razor",
+                            "scopeName": "text.html.cshtml",
+                            "path": "./syntaxes/cshtml.tmLanguage.json",
+                            "embeddedLanguages": {
+                                "section.embedded.source.cshtml": "csharp",
+                                "source.css": "css",
+                                "source.js": "javascript"
+                            }
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/razor"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "shaderlab",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js tgjones/shaders-tmLanguage grammars/shaderlab.json ./syntaxes/shaderlab.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "shaderlab",
+                            "extensions": [
+                                ".shader"
+                            ],
+                            "aliases": [
+                                "ShaderLab",
+                                "shaderlab"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "shaderlab",
+                            "path": "./syntaxes/shaderlab.tmLanguage.json",
+                            "scopeName": "source.shaderlab"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/shaderlab"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "shellscript",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js atom/language-shellscript grammars/shell-unix-bash.cson ./syntaxes/shell-unix-bash.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "shellscript",
+                            "aliases": [
+                                "Shell Script",
+                                "shellscript",
+                                "bash",
+                                "sh",
+                                "zsh",
+                                "ksh",
+                                "csh"
+                            ],
+                            "extensions": [
+                                ".sh",
+                                ".bash",
+                                ".bashrc",
+                                ".bash_aliases",
+                                ".bash_profile",
+                                ".bash_login",
+                                ".ebuild",
+                                ".install",
+                                ".profile",
+                                ".bash_logout",
+                                ".zsh",
+                                ".zshrc",
+                                ".zprofile",
+                                ".zlogin",
+                                ".zlogout",
+                                ".zshenv",
+                                ".zsh-theme",
+                                ".ksh",
+                                ".csh",
+                                ".cshrc"
+                            ],
+                            "filenames": [
+                                "APKBUILD",
+                                "PKGBUILD",
+                                ".envrc"
+                            ],
+                            "firstLine": "^#!.*\\b(bash|zsh|sh|tcsh|ksh|ash|qsh|csh).*|^#\\s*-\\*-[^*]*mode:\\s*shell-script[^*]*-\\*-",
+                            "configuration": "./language-configuration.json",
+                            "mimetypes": [
+                                "text/x-shellscript"
+                            ]
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "shellscript",
+                            "scopeName": "source.shell",
+                            "path": "./syntaxes/shell-unix-bash.tmLanguage.json"
+                        }
+                    ],
+                    "configurationDefaults": {
+                        "[shellscript]": {
+                            "files.eol": "\n"
+                        }
+                    }
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/shellscript"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "sql",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js Microsoft/vscode-mssql syntaxes/SQL.plist ./syntaxes/sql.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "sql",
+                            "extensions": [
+                                ".sql",
+                                ".dsql"
+                            ],
+                            "aliases": [
+                                "SQL"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "sql",
+                            "scopeName": "source.sql",
+                            "path": "./syntaxes/sql.tmLanguage.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/sql"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "theme-kimbie-dark",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "themes": [
+                        {
+                            "label": "Kimbie Dark",
+                            "uiTheme": "vs-dark",
+                            "path": "./themes/kimbie-dark-color-theme.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/theme-kimbie-dark"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "theme-defaults",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "categories": [
+                    "Themes"
+                ],
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "themes": [
+                        {
+                            "id": "Default Dark+",
+                            "label": "Dark+ (default dark)",
+                            "uiTheme": "vs-dark",
+                            "path": "./themes/dark_plus.json"
+                        },
+                        {
+                            "id": "Default Light+",
+                            "label": "Light+ (default light)",
+                            "uiTheme": "vs",
+                            "path": "./themes/light_plus.json"
+                        },
+                        {
+                            "id": "Visual Studio Dark",
+                            "label": "Dark (Visual Studio)",
+                            "uiTheme": "vs-dark",
+                            "path": "./themes/dark_vs.json"
+                        },
+                        {
+                            "id": "Visual Studio Light",
+                            "label": "Light (Visual Studio)",
+                            "uiTheme": "vs",
+                            "path": "./themes/light_vs.json"
+                        },
+                        {
+                            "id": "Default High Contrast",
+                            "label": "High Contrast",
+                            "uiTheme": "hc-black",
+                            "path": "./themes/hc_black.json"
+                        }
+                    ],
+                    "iconThemes": [
+                        {
+                            "id": "vs-minimal",
+                            "label": "Minimal (Visual Studio Code)",
+                            "path": "./fileicons/vs_minimal-icon-theme.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/theme-defaults"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "theme-abyss",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "themes": [
+                        {
+                            "label": "Abyss",
+                            "uiTheme": "vs-dark",
+                            "path": "./themes/abyss-color-theme.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/theme-abyss"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "swift",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js textmate/swift.tmbundle Syntaxes/Swift.tmLanguage ./syntaxes/swift.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "swift",
+                            "aliases": [
+                                "Swift",
+                                "swift"
+                            ],
+                            "extensions": [
+                                ".swift"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "swift",
+                            "scopeName": "source.swift",
+                            "path": "./syntaxes/swift.tmLanguage.json"
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "swift",
+                            "path": "./snippets/swift.code-snippets"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/swift"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "theme-monokai-dimmed",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "themes": [
+                        {
+                            "label": "Monokai Dimmed",
+                            "uiTheme": "vs-dark",
+                            "path": "./themes/dimmed-monokai-color-theme.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/theme-monokai-dimmed"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "theme-quietlight",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "themes": [
+                        {
+                            "label": "Quiet Light",
+                            "uiTheme": "vs",
+                            "path": "./themes/quietlight-color-theme.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/theme-quietlight"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "vscode-theme-seti",
+                "private": true,
+                "version": "1.0.0",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "publisher": "vscode",
+                "license": "MIT",
+                "icon": "icons/seti-circular-128x128.png",
+                "scripts": {
+                    "update": "node ./build/update-icon-theme.js"
+                },
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "iconThemes": [
+                        {
+                            "id": "vs-seti",
+                            "label": "Seti (Visual Studio Code)",
+                            "path": "./icons/vs-seti-icon-theme.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/theme-seti"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "theme-solarized-light",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "themes": [
+                        {
+                            "label": "Solarized Light",
+                            "uiTheme": "vs",
+                            "path": "./themes/solarized-light-color-theme.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/theme-solarized-light"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "theme-monokai",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "themes": [
+                        {
+                            "label": "Monokai",
+                            "uiTheme": "vs-dark",
+                            "path": "./themes/monokai-color-theme.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/theme-monokai"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "theme-tomorrow-night-blue",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "themes": [
+                        {
+                            "label": "Tomorrow Night Blue",
+                            "uiTheme": "vs-dark",
+                            "path": "./themes/tomorrow-night-blue-theme.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/theme-tomorrow-night-blue"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "vb",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js textmate/asp.vb.net.tmbundle Syntaxes/ASP%20VB.net.plist ./syntaxes/asp-vb-net.tmlanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "vb",
+                            "extensions": [
+                                ".vb",
+                                ".brs",
+                                ".vbs",
+                                ".bas"
+                            ],
+                            "aliases": [
+                                "Visual Basic",
+                                "vb"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "vb",
+                            "scopeName": "source.asp.vb.net",
+                            "path": "./syntaxes/asp-vb-net.tmlanguage.json"
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "vb",
+                            "path": "./snippets/vb.code-snippets"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/vb"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "theme-solarized-dark",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "themes": [
+                        {
+                            "label": "Solarized Dark",
+                            "uiTheme": "vs-dark",
+                            "path": "./themes/solarized-dark-color-theme.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/theme-solarized-dark"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "typescript",
+                "description": "%description%",
+                "displayName": "%displayName%",
+                "version": "1.0.0",
+                "author": "vscode",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ./build/update-grammars.js"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "typescript",
+                            "aliases": [
+                                "TypeScript",
+                                "ts",
+                                "typescript"
+                            ],
+                            "extensions": [
+                                ".ts"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        },
+                        {
+                            "id": "typescriptreact",
+                            "aliases": [
+                                "TypeScript React",
+                                "tsx"
+                            ],
+                            "extensions": [
+                                ".tsx"
+                            ],
+                            "configuration": "./language-configuration.json"
+                        },
+                        {
+                            "id": "jsonc",
+                            "filenames": [
+                                "tsconfig.json",
+                                "jsconfig.json"
+                            ],
+                            "filenamePatterns": [
+                                "tsconfig.*.json",
+                                "tsconfig-*.json"
+                            ]
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "typescript",
+                            "scopeName": "source.ts",
+                            "path": "./syntaxes/TypeScript.tmLanguage.json",
+                            "tokenTypes": {
+                                "entity.name.type.instance.jsdoc": "other",
+                                "entity.name.function.tagged-template": "other",
+                                "meta.import string.quoted": "other",
+                                "variable.other.jsdoc": "other"
+                            }
+                        },
+                        {
+                            "language": "typescriptreact",
+                            "scopeName": "source.tsx",
+                            "path": "./syntaxes/TypeScriptReact.tmLanguage.json",
+                            "embeddedLanguages": {
+                                "meta.tag.tsx": "jsx-tags",
+                                "meta.tag.without-attributes.tsx": "jsx-tags",
+                                "meta.tag.attributes.tsx": "typescriptreact",
+                                "meta.embedded.expression.tsx": "typescriptreact"
+                            },
+                            "tokenTypes": {
+                                "entity.name.type.instance.jsdoc": "other",
+                                "entity.name.function.tagged-template": "other",
+                                "meta.import string.quoted": "other",
+                                "variable.other.jsdoc": "other"
+                            }
+                        }
+                    ],
+                    "semanticTokenScopes": [
+                        {
+                            "language": "typescript",
+                            "scopes": {
+                                "property": [
+                                    "variable.other.property.ts"
+                                ],
+                                "property.readonly": [
+                                    "variable.other.constant.property.ts"
+                                ],
+                                "variable": [
+                                    "variable.other.readwrite.ts"
+                                ],
+                                "variable.readonly": [
+                                    "variable.other.constant.object.ts"
+                                ],
+                                "function": [
+                                    "entity.name.function.ts"
+                                ],
+                                "namespace": [
+                                    "entity.name.type.module.ts"
+                                ],
+                                "variable.defaultLibrary": [
+                                    "support.variable.ts"
+                                ],
+                                "function.defaultLibrary": [
+                                    "support.function.ts"
+                                ]
+                            }
+                        },
+                        {
+                            "language": "typescriptreact",
+                            "scopes": {
+                                "property": [
+                                    "variable.other.property.tsx"
+                                ],
+                                "property.readonly": [
+                                    "variable.other.constant.property.tsx"
+                                ],
+                                "variable": [
+                                    "variable.other.readwrite.tsx"
+                                ],
+                                "variable.readonly": [
+                                    "variable.other.constant.object.tsx"
+                                ],
+                                "function": [
+                                    "entity.name.function.tsx"
+                                ],
+                                "namespace": [
+                                    "entity.name.type.module.tsx"
+                                ],
+                                "variable.defaultLibrary": [
+                                    "support.variable.tsx"
+                                ],
+                                "function.defaultLibrary": [
+                                    "support.function.tsx"
+                                ]
+                            }
+                        }
+                    ],
+                    "snippets": [
+                        {
+                            "language": "typescript",
+                            "path": "./snippets/typescript.code-snippets"
+                        },
+                        {
+                            "language": "typescriptreact",
+                            "path": "./snippets/typescript.code-snippets"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/typescript-basics"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "theme-red",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "themes": [
+                        {
+                            "label": "Red",
+                            "uiTheme": "vs-dark",
+                            "path": "./themes/Red-color-theme.json"
+                        }
+                    ]
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/theme-red"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "vscode-web-playground",
+                "description": "Web playground for VS Code",
+                "version": "0.0.1",
+                "publisher": "vscode",
+                "license": "MIT",
+                "enableProposedApi": true,
+                "private": true,
+                "activationEvents": [
+                    "onFileSystem:memfs",
+                    "onDebug"
+                ],
+                "main": "./out/extension",
+                "engines": {
+                    "vscode": "^1.25.0"
+                },
+                "contributes": {
+                    "taskDefinitions": [
+                        {
+                            "type": "custombuildscript",
+                            "required": [
+                                "flavor"
+                            ],
+                            "properties": {
+                                "flavor": {
+                                    "type": "string",
+                                    "description": "The build flavor. Should be either '32' or '64'."
+                                },
+                                "flags": {
+                                    "type": "array",
+                                    "description": "Additional build flags."
+                                }
+                            }
+                        }
+                    ],
+                    "breakpoints": [
+                        {
+                            "language": "markdown"
+                        }
+                    ],
+                    "debuggers": [
+                        {
+                            "type": "mock",
+                            "label": "Mock Debug",
+                            "languages": [
+                                "markdown"
+                            ],
+                            "configurationAttributes": {
+                                "launch": {
+                                    "required": [
+                                        "program"
+                                    ],
+                                    "properties": {
+                                        "program": {
+                                            "type": "string",
+                                            "description": "Absolute path to a text file.",
+                                            "default": "${workspaceFolder}/file.md"
+                                        },
+                                        "stopOnEntry": {
+                                            "type": "boolean",
+                                            "description": "Automatically stop after launch.",
+                                            "default": true
+                                        },
+                                        "trace": {
+                                            "type": "boolean",
+                                            "description": "Enable logging of the Debug Adapter Protocol.",
+                                            "default": true
+                                        }
+                                    }
+                                }
+                            },
+                            "initialConfigurations": [
+                                {
+                                    "type": "mock",
+                                    "request": "launch",
+                                    "name": "Debug file.md",
+                                    "program": "${workspaceFolder}/file.md"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "scripts": {
+                    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+                    "vscode:prepublish": "node ../../node_modules/gulp/bin/gulp.js --gulpfile ../../build/gulpfile.extensions.js compile-extension:vscode-api-tests ./tsconfig.json"
+                },
+                "devDependencies": {
+                    "@types/mocha": "2.2.43",
+                    "@types/node": "^12.11.7",
+                    "mocha-junit-reporter": "^1.17.0",
+                    "mocha-multi-reporters": "^1.1.7"
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/vscode-web-playground"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "xml",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "xml",
+                            "extensions": [
+                                ".xml",
+                                ".xsd",
+                                ".ascx",
+                                ".atom",
+                                ".axml",
+                                ".bpmn",
+                                ".cpt",
+                                ".csl",
+                                ".csproj",
+                                ".csproj.user",
+                                ".dita",
+                                ".ditamap",
+                                ".dtd",
+                                ".ent",
+                                ".mod",
+                                ".dtml",
+                                ".fsproj",
+                                ".fxml",
+                                ".iml",
+                                ".isml",
+                                ".jmx",
+                                ".launch",
+                                ".menu",
+                                ".mxml",
+                                ".nuspec",
+                                ".opml",
+                                ".owl",
+                                ".proj",
+                                ".props",
+                                ".pt",
+                                ".publishsettings",
+                                ".pubxml",
+                                ".pubxml.user",
+                                ".rbxlx",
+                                ".rbxmx",
+                                ".rdf",
+                                ".rng",
+                                ".rss",
+                                ".shproj",
+                                ".storyboard",
+                                ".svg",
+                                ".targets",
+                                ".tld",
+                                ".tmx",
+                                ".vbproj",
+                                ".vbproj.user",
+                                ".vcxproj",
+                                ".vcxproj.filters",
+                                ".wsdl",
+                                ".wxi",
+                                ".wxl",
+                                ".wxs",
+                                ".xaml",
+                                ".xbl",
+                                ".xib",
+                                ".xlf",
+                                ".xliff",
+                                ".xpdl",
+                                ".xul",
+                                ".xoml"
+                            ],
+                            "firstLine": "(\\<\\?xml.*)|(\\<svg)|(\\<\\!doctype\\s+svg)",
+                            "aliases": [
+                                "XML",
+                                "xml"
+                            ],
+                            "configuration": "./xml.language-configuration.json"
+                        },
+                        {
+                            "id": "xsl",
+                            "extensions": [
+                                ".xsl",
+                                ".xslt"
+                            ],
+                            "aliases": [
+                                "XSL",
+                                "xsl"
+                            ],
+                            "configuration": "./xsl.language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "xml",
+                            "scopeName": "text.xml",
+                            "path": "./syntaxes/xml.tmLanguage.json"
+                        },
+                        {
+                            "language": "xsl",
+                            "scopeName": "text.xml.xsl",
+                            "path": "./syntaxes/xsl.tmLanguage.json"
+                        }
+                    ]
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js atom/language-xml grammars/xml.cson ./syntaxes/xml.tmLanguage.json grammars/xsl.cson ./syntaxes/xsl.tmLanguage.json"
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/xml"
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "yaml",
+                "displayName": "%displayName%",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "vscode",
+                "license": "MIT",
+                "engines": {
+                    "vscode": "*"
+                },
+                "scripts": {
+                    "update-grammar": "node ../../build/npm/update-grammar.js textmate/yaml.tmbundle Syntaxes/YAML.tmLanguage ./syntaxes/yaml.tmLanguage.json"
+                },
+                "contributes": {
+                    "languages": [
+                        {
+                            "id": "yaml",
+                            "aliases": [
+                                "YAML",
+                                "yaml"
+                            ],
+                            "extensions": [
+                                ".yml",
+                                ".eyaml",
+                                ".eyml",
+                                ".yaml"
+                            ],
+                            "firstLine": "^#cloud-config",
+                            "configuration": "./language-configuration.json"
+                        }
+                    ],
+                    "grammars": [
+                        {
+                            "language": "yaml",
+                            "scopeName": "source.yaml",
+                            "path": "./syntaxes/yaml.tmLanguage.json"
+                        }
+                    ],
+                    "configurationDefaults": {
+                        "[yaml]": {
+                            "editor.insertSpaces": true,
+                            "editor.tabSize": 2,
+                            "editor.autoIndent": "advanced"
+                        }
+                    }
+                },
+                "extensionKind": [
+                    "web"
+                ]
+            },
+            "extensionLocation": {
+                "scheme": "http",
+                "authority": "localhost:8080",
+                "path": "/static-extension/yaml"
+            }
+        }
+    ],
+    "folderUri": {
+        "scheme": "memfs",
+        "path": "/sample-folder"
+    }
+}

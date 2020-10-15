@@ -1,0 +1,28 @@
+{
+    "staticExtensions": [
+        {
+            "packageJSON": {
+                "name": "toobar-config",
+                "displayName": "腾讯文档工具栏",
+                "description": "%description%",
+                "version": "1.0.0",
+                "publisher": "tencent",
+                "license": "MIT",
+                "contributes": {
+                    "toolbar": [
+                        {
+                            "command": "undo",
+                            "icon": "undo",
+                            "when": "width >= 300"
+                        },
+                        {
+                            "command": "redo",
+                            "icon": "redo",
+                            "when": "platform == pc"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

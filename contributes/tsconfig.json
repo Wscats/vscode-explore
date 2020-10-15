@@ -16,7 +16,8 @@
             "@/*": [
                 "./src/*"
             ]
-        }
+        },
+        "resolveJsonModule": true,
     },
     "exclude": []
 }
