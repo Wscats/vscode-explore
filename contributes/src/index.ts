@@ -10,7 +10,7 @@ export interface IRawLanguageExtensionPoint {
     command: string;
 }
 
-const toolbarService: any[] = [];
+const toolbarService: IRawLanguageExtensionPoint[] = [];
 
 ExtensionsRegistry.registerExtensionPoint<IRawLanguageExtensionPoint[]>({
     extensionPoint: 'toolbar',
@@ -22,9 +22,7 @@ ExtensionsRegistry.registerExtensionPoint<IRawLanguageExtensionPoint[]>({
         for (let j = 0, lenJ = extension.value.length; j < lenJ; j++) {
             let ext = extension.value[j];
             console.log(ext.command);
-            toolbarService.push({
-                ext
-            })
+            toolbarService.push(ext);
         }
     }
 });
