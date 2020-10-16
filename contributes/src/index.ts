@@ -10,6 +10,8 @@ export interface IRawLanguageExtensionPoint {
     command: string;
 }
 
+const toolbarService: any[] = [];
+
 ExtensionsRegistry.registerExtensionPoint<IRawLanguageExtensionPoint[]>({
     extensionPoint: 'toolbar',
     jsonSchema: {}
@@ -20,6 +22,9 @@ ExtensionsRegistry.registerExtensionPoint<IRawLanguageExtensionPoint[]>({
         for (let j = 0, lenJ = extension.value.length; j < lenJ; j++) {
             let ext = extension.value[j];
             console.log(ext.command);
+            toolbarService.push({
+                ext
+            })
         }
     }
 });
@@ -83,3 +88,7 @@ const descriptions = staticExtensions.map(data => <IExtensionDescription>{
 
 // 处理所有插件配置项
 _doHandleExtensionPoints(descriptions);
+console.log(toolbarService);
+toolbarService.forEach((item) => {
+    console.log(item);
+})
