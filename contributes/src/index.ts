@@ -16,6 +16,7 @@ ExtensionsRegistry.registerExtensionPoint<IRawLanguageExtensionPoint[]>({
     extensionPoint: 'toolbar',
     jsonSchema: {}
 }).setHandler((extensions: readonly IExtensionPointUser<IRawLanguageExtensionPoint[]>[]) => {
+    console.log('-----------setHandler------------');
     for (let i = 0, len = extensions.length; i < len; i++) {
         let extension = extensions[i];
         console.log(extension);
@@ -29,6 +30,7 @@ ExtensionsRegistry.registerExtensionPoint<IRawLanguageExtensionPoint[]>({
 
 const hasOwnProperty = Object.hasOwnProperty;
 function _doHandleExtensionPoints(affectedExtensions: IExtensionDescription[]): void {
+    console.log('-----------_doHandleExtensionPoints------------');
     const affectedExtensionPoints: { [extPointName: string]: boolean; } = Object.create(null);
     for (let extensionDescription of affectedExtensions) {
         if (extensionDescription.contributes) {
@@ -86,6 +88,8 @@ const descriptions = staticExtensions.map(data => <IExtensionDescription>{
 
 // 处理所有插件配置项
 _doHandleExtensionPoints(descriptions);
+
+console.log('-----------toolbarService.forEach------------');
 console.log(toolbarService);
 toolbarService.forEach((item) => {
     console.log(item);
