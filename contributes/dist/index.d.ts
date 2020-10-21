@@ -1,3 +1,1 @@
-export interface IRawLanguageExtensionPoint {
-    command: string;
-}
+export {};

@@ -2,24 +2,104 @@
     "staticExtensions": [
         {
             "packageJSON": {
-                "name": "toobar-config",
+                "name": "ToolbarsContribution",
                 "displayName": "腾讯文档工具栏",
-                "description": "%description%",
+                "description": "toolbar工具栏命令，图标等配置",
                 "version": "1.0.0",
                 "publisher": "tencent",
                 "license": "MIT",
                 "contributes": {
-                    "toolbar": [
+                    "ToolbarsContribution": [
                         {
                             "command": "undo",
+                            "component": "Undobutton",
                             "icon": "undo",
-                            "when": "width >= 300"
+                            "when": "isMore == true && (window.innerWidth == 1440 && window.innerWidth == 855) || window.innerWidth == 855"
                         },
                         {
                             "command": "redo",
                             "icon": "redo",
                             "when": "platform == pc"
+                        },
+                        {
+                            "command": "printing",
+                            "icon": "printing",
+                            "when": "scmProvider == git && scmResourceGroup == merge"
                         }
+                    ]
+                }
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "PcShortToolbarButtonConfig",
+                "displayName": "腾讯文档工具栏",
+                "description": "936 到 894之间的顺序（可编辑）",
+                "version": "1.0.0",
+                "publisher": "tencent",
+                "license": "MIT",
+                "contributes": {
+                    "PcShortToolbarButtonConfig": [
+                        "undo",
+                        "redo",
+                        "format",
+                        "clear-format",
+                        "insert-group",
+                        "number-format",
+                        "decimal",
+                        "font-family",
+                        "font-size",
+                        "bold",
+                        "italics",
+                        "underline",
+                        "strike",
+                        "font-color",
+                        "paint-color",
+                        "border",
+                        "merge-cell",
+                        "horizontal",
+                        "vertical",
+                        "auto-wrap",
+                        "freeze",
+                        "calculate",
+                        "filter",
+                        "sort",
+                        "validation",
+                        "range-auth",
+                        "condition-format",
+                        "search"
+                    ]
+                }
+            }
+        },
+        {
+            "packageJSON": {
+                "name": "PcShortToolbarButtonReadonlyConfig",
+                "displayName": "腾讯文档工具栏",
+                "description": "936 到 894之间的顺序（只读）",
+                "version": "1.0.0",
+                "publisher": "tencent",
+                "license": "MIT",
+                "contributes": {
+                    "PcShortToolbarButtonReadonlyConfig": [
+                        "undo",
+                        "redo",
+                        "format",
+                        "clear-format",
+                        "insert-group",
+                        "number-format",
+                        "decimal",
+                        "font-family",
+                        "font-size",
+                        "bold",
+                        "font-color",
+                        "italics",
+                        "underline",
+                        "strike",
+                        "paint-color",
+                        "border",
+                        "merge-cell",
+                        "search"
                     ]
                 }
             }

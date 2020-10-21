@@ -2,32 +2,15 @@ import { ExtensionsRegistry, ExtensionMessageCollector, ExtensionPoint, IExtensi
 import { IExtensionManifest, ExtensionIdentifier, IExtensionDescription, } from './vs/platform/extensions/common/extensions';
 import { ActivationTimes, ExtensionPointContribution, IExtensionService, IExtensionsStatus, IMessage, IWillActivateEvent, IResponsiveStateChangeEvent, toExtension } from './vs/workbench/services/extensions/common/extensions';
 import { localize } from './vs/nls';
+import { IJSONSchema } from './vs/base/common/jsonSchema';
 import { URI } from './vs/base/common/uri';
+import { ContextKeyExpr, ContextKeyExpression } from './vs/platform/contextkey/common/contextkey';
+import { MenuId, MenuRegistry, ILocalizedString, IMenuItem, ICommandAction } from './vs/platform/actions/common/actions';
 // @ts-ignore
 import config from './config.json';
-
-export interface IRawLanguageExtensionPoint {
-    command: string;
-}
-
-const toolbarService: IRawLanguageExtensionPoint[] = [];
-
-ExtensionsRegistry.registerExtensionPoint<IRawLanguageExtensionPoint[]>({
-    extensionPoint: 'toolbar',
-    jsonSchema: {}
-}).setHandler((extensions: readonly IExtensionPointUser<IRawLanguageExtensionPoint[]>[]) => {
-    console.log('-----------setHandler------------');
-    for (let i = 0, len = extensions.length; i < len; i++) {
-        let extension = extensions[i];
-        console.log(extension);
-        for (let j = 0, lenJ = extension.value.length; j < lenJ; j++) {
-            let ext = extension.value[j];
-            console.log(ext.command);
-            toolbarService.push(ext);
-        }
-    }
-});
-
+import { _commandRegistrations } from './register';
+console.log(_commandRegistrations);
+// export { ToolbarsContribution, PcShortToolbarButtonConfig };
 const hasOwnProperty = Object.hasOwnProperty;
 function _doHandleExtensionPoints(affectedExtensions: IExtensionDescription[]): void {
     console.log('-----------_doHandleExtensionPoints------------');
@@ -89,8 +72,8 @@ const descriptions = staticExtensions.map(data => <IExtensionDescription>{
 // 处理所有插件配置项
 _doHandleExtensionPoints(descriptions);
 
-console.log('-----------toolbarService.forEach------------');
-console.log(toolbarService);
-toolbarService.forEach((item) => {
-    console.log(item);
-})
+for (const commandId of MenuRegistry.getCommands().keys()) {
+    console.log(MenuRegistry.getCommand(commandId));
+    
+}
+console.log(MenuRegistry);
