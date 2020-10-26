@@ -37,6 +37,7 @@ export interface ICommandAction {
 	precondition?: ContextKeyExpression;
 	toggled?: ContextKeyExpression | { condition: ContextKeyExpression, icon?: Icon, tooltip?: string | ILocalizedString };
 	component?: any;
+	when?: ContextKeyExpression;
 }
 
 export type ISerializableCommandAction = UriDto<ICommandAction>;

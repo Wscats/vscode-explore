@@ -9,7 +9,11 @@ export declare const enum ContextKeyExprType {
     And = 6,
     Regex = 7,
     NotRegex = 8,
-    Or = 9
+    Or = 9,
+    Greater = 10,
+    Less = 11,
+    GreaterOrEquals = 12,
+    LessOrEquals = 13
 }
 export interface IContextKeyExprMapper {
     mapDefined(key: string): ContextKeyExpression;
@@ -27,7 +31,7 @@ export interface IContextKeyExpression {
     map(mapFnc: IContextKeyExprMapper): ContextKeyExpression;
     negate(): ContextKeyExpression;
 }
-export declare type ContextKeyExpression = (ContextKeyFalseExpr | ContextKeyTrueExpr | ContextKeyDefinedExpr | ContextKeyNotExpr | ContextKeyEqualsExpr | ContextKeyNotEqualsExpr | ContextKeyRegexExpr | ContextKeyNotRegexExpr | ContextKeyAndExpr | ContextKeyOrExpr);
+export declare type ContextKeyExpression = (ContextKeyFalseExpr | ContextKeyTrueExpr | ContextKeyDefinedExpr | ContextKeyNotExpr | ContextKeyEqualsExpr | ContextKeyGreaterExpr | ContextKeyGreaterOrEqualsExpr | ContextKeyLessExpr | ContextKeyLessOrEqualsExpr | ContextKeyNotEqualsExpr | ContextKeyRegexExpr | ContextKeyNotRegexExpr | ContextKeyAndExpr | ContextKeyOrExpr);
 export declare abstract class ContextKeyExpr {
     static false(): ContextKeyExpression;
     static true(): ContextKeyExpression;
@@ -38,6 +42,10 @@ export declare abstract class ContextKeyExpr {
     static not(key: string): ContextKeyExpression;
     static and(...expr: Array<ContextKeyExpression | undefined | null>): ContextKeyExpression | undefined;
     static or(...expr: Array<ContextKeyExpression | undefined | null>): ContextKeyExpression | undefined;
+    static greaterOrEquals(key: string, value: any): ContextKeyExpression;
+    static lessOrEquals(key: string, value: any): ContextKeyExpression;
+    static greater(key: string, value: any): ContextKeyExpression;
+    static less(key: string, value: any): ContextKeyExpression;
     static deserialize(serialized: string | null | undefined, strict?: boolean): ContextKeyExpression | undefined;
     private static _deserializeOrExpression;
     private static _deserializeAndExpression;
@@ -101,6 +109,62 @@ export declare class ContextKeyNotEqualsExpr implements IContextKeyExpression {
     private readonly value;
     static create(key: string, value: any): ContextKeyExpression;
     readonly type = ContextKeyExprType.NotEquals;
+    private constructor();
+    cmp(other: ContextKeyExpression): number;
+    equals(other: ContextKeyExpression): boolean;
+    evaluate(context: IContext): boolean;
+    serialize(): string;
+    keys(): string[];
+    map(mapFnc: IContextKeyExprMapper): ContextKeyExpression;
+    negate(): ContextKeyExpression;
+}
+export declare class ContextKeyGreaterOrEqualsExpr implements IContextKeyExpression {
+    private readonly key;
+    private readonly value;
+    static create(key: string, value: any): ContextKeyExpression;
+    readonly type = ContextKeyExprType.GreaterOrEquals;
+    private constructor();
+    cmp(other: ContextKeyExpression): number;
+    equals(other: ContextKeyExpression): boolean;
+    evaluate(context: IContext): boolean;
+    serialize(): string;
+    keys(): string[];
+    map(mapFnc: IContextKeyExprMapper): ContextKeyExpression;
+    negate(): ContextKeyExpression;
+}
+export declare class ContextKeyGreaterExpr implements IContextKeyExpression {
+    private readonly key;
+    private readonly value;
+    static create(key: string, value: any): ContextKeyExpression;
+    readonly type = ContextKeyExprType.Greater;
+    private constructor();
+    cmp(other: ContextKeyExpression): number;
+    equals(other: ContextKeyExpression): boolean;
+    evaluate(context: IContext): boolean;
+    serialize(): string;
+    keys(): string[];
+    map(mapFnc: IContextKeyExprMapper): ContextKeyExpression;
+    negate(): ContextKeyExpression;
+}
+export declare class ContextKeyLessExpr implements IContextKeyExpression {
+    private readonly key;
+    private readonly value;
+    static create(key: string, value: any): ContextKeyExpression;
+    readonly type = ContextKeyExprType.Less;
+    private constructor();
+    cmp(other: ContextKeyExpression): number;
+    equals(other: ContextKeyExpression): boolean;
+    evaluate(context: IContext): boolean;
+    serialize(): string;
+    keys(): string[];
+    map(mapFnc: IContextKeyExprMapper): ContextKeyExpression;
+    negate(): ContextKeyExpression;
+}
+export declare class ContextKeyLessOrEqualsExpr implements IContextKeyExpression {
+    private readonly key;
+    private readonly value;
+    static create(key: string, value: any): ContextKeyExpression;
+    readonly type = ContextKeyExprType.LessOrEquals;
     private constructor();
     cmp(other: ContextKeyExpression): number;
     equals(other: ContextKeyExpression): boolean;

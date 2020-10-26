@@ -27,6 +27,7 @@ export interface ICommandAction {
         tooltip?: string | ILocalizedString;
     };
     component?: any;
+    when?: ContextKeyExpression;
 }
 export declare type ISerializableCommandAction = UriDto<ICommandAction>;
 export interface IMenuItem {

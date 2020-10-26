@@ -12,19 +12,29 @@
                     "ToolbarsContribution": [
                         {
                             "command": "undo",
-                            "component": "Undobutton",
+                            "component": "Redobutton",
                             "icon": "undo",
-                            "when": "isMore == true && (window.innerWidth == 1440 && window.innerWidth == 855) || window.innerWidth == 855"
+                            "when": "SpreadsheetApp.sheetStatus.rangesStatus.status.canEdit == true && window.innerWidth >= 1080"
                         },
                         {
                             "command": "redo",
                             "icon": "redo",
-                            "when": "platform == pc"
+                            "when": "platform == pc && window.innerWidth == 1080"
                         },
                         {
                             "command": "printing",
                             "icon": "printing",
                             "when": "scmProvider == git && scmResourceGroup == merge"
+                        },
+                        {
+                            "command": "greater",
+                            "icon": "greater",
+                            "when": "window.innerWidth >= 900 && window.innerWidth >= 1100"
+                        },
+                        {
+                            "command": "less",
+                            "icon": "less",
+                            "when": "window.innerWidth > 800 && window.innerWidth < 1200 &&  window.innerWidth <= 1200"
                         }
                     ]
                 }

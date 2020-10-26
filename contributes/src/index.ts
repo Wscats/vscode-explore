@@ -4,8 +4,10 @@ import { ActivationTimes, ExtensionPointContribution, IExtensionService, IExtens
 import { localize } from './vs/nls';
 import { IJSONSchema } from './vs/base/common/jsonSchema';
 import { URI } from './vs/base/common/uri';
-import { ContextKeyExpr, ContextKeyExpression } from './vs/platform/contextkey/common/contextkey';
+import { ContextKeyExpr, ContextKeyExpression, IContextKeyService } from './vs/platform/contextkey/common/contextkey';
 import { MenuId, MenuRegistry, ILocalizedString, IMenuItem, ICommandAction } from './vs/platform/actions/common/actions';
+import { ServiceCollection } from './vs/platform/instantiation/common/serviceCollection';
+import { KeybindingResolver } from './vs/platform/keybinding/common/keybindingResolver';
 // @ts-ignore
 import config from './config.json';
 import { _commandRegistrations } from './register';
@@ -72,8 +74,37 @@ const descriptions = staticExtensions.map(data => <IExtensionDescription>{
 // 处理所有插件配置项
 _doHandleExtensionPoints(descriptions);
 
-for (const commandId of MenuRegistry.getCommands().keys()) {
-    console.log(MenuRegistry.getCommand(commandId));
-    
+class Context {
+    private readonly _values = new Map<string, any>();
+    getValue(key: string): any {
+        if (this._values.has(key)) {
+            return this._values.get(key);
+        }
+    }
+    setValue(key: string, value: any) {
+        this._values.set(key, value);
+    }
 }
-console.log(MenuRegistry);
+
+const context = new Context();
+context.setValue('platform', 'pc');
+context.setValue('scmProvider', 'git');
+context.setValue('scmResourceGroup', 'merge');
+context.setValue('window.innerWidth', window.innerWidth);
+context.setValue('SpreadsheetApp.sheetStatus.rangesStatus.status.canEdit', false);
+
+console.log(context);
+
+for (const commandId of MenuRegistry.getCommands().keys()) {
+    let item = MenuRegistry.getCommand(commandId);
+    console.log(item, contextMatchesRules(item?.when));
+    if (contextMatchesRules(item?.when)) {
+
+    }
+}
+
+
+function contextMatchesRules(rules: ContextKeyExpression | undefined): boolean {
+    const result = KeybindingResolver.contextMatchesRules(context, rules);
+    return result;
+}

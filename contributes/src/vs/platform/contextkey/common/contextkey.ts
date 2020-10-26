@@ -27,7 +27,11 @@ export const enum ContextKeyExprType {
 	And = 6,
 	Regex = 7,
 	NotRegex = 8,
-	Or = 9
+	Or = 9,
+	Greater = 10,
+	Less = 11,
+	GreaterOrEquals = 12,
+	LessOrEquals = 13
 }
 
 export interface IContextKeyExprMapper {
@@ -51,7 +55,7 @@ export interface IContextKeyExpression {
 
 export type ContextKeyExpression = (
 	ContextKeyFalseExpr | ContextKeyTrueExpr | ContextKeyDefinedExpr | ContextKeyNotExpr
-	| ContextKeyEqualsExpr | ContextKeyNotEqualsExpr | ContextKeyRegexExpr
+	| ContextKeyEqualsExpr | ContextKeyGreaterExpr | ContextKeyGreaterOrEqualsExpr | ContextKeyLessExpr | ContextKeyLessOrEqualsExpr | ContextKeyNotEqualsExpr | ContextKeyRegexExpr
 	| ContextKeyNotRegexExpr | ContextKeyAndExpr | ContextKeyOrExpr
 );
 
@@ -93,6 +97,22 @@ export abstract class ContextKeyExpr {
 		return ContextKeyOrExpr.create(expr);
 	}
 
+	public static greaterOrEquals(key: string, value: any): ContextKeyExpression {
+		return ContextKeyGreaterOrEqualsExpr.create(key, value);
+	}
+
+	public static lessOrEquals(key: string, value: any): ContextKeyExpression {
+		return ContextKeyLessOrEqualsExpr.create(key, value);
+	}
+
+	public static greater(key: string, value: any): ContextKeyExpression {
+		return ContextKeyGreaterExpr.create(key, value);
+	}
+
+	public static less(key: string, value: any): ContextKeyExpression {
+		return ContextKeyLessExpr.create(key, value);
+	}
+
 	public static deserialize(serialized: string | null | undefined, strict: boolean = false): ContextKeyExpression | undefined {
 		if (!serialized) {
 			return undefined;
@@ -127,6 +147,28 @@ export abstract class ContextKeyExpr {
 		if (serializedOne.indexOf('=~') >= 0) {
 			let pieces = serializedOne.split('=~');
 			return ContextKeyRegexExpr.create(pieces[0].trim(), this._deserializeRegexValue(pieces[1], strict));
+		}
+
+		
+
+		if (serializedOne.indexOf('>=') >= 0) {
+			let pieces = serializedOne.split('>=');
+			return ContextKeyGreaterOrEqualsExpr.create(pieces[0].trim(), this._deserializeValue(pieces[1], strict));
+		}
+
+		if (serializedOne.indexOf('<=') >= 0) {
+			let pieces = serializedOne.split('<=');
+			return ContextKeyLessOrEqualsExpr.create(pieces[0].trim(), this._deserializeValue(pieces[1], strict));
+		}
+
+		if (serializedOne.indexOf('>') >= 0) {
+			let pieces = serializedOne.split('>');
+			return ContextKeyGreaterExpr.create(pieces[0].trim(), this._deserializeValue(pieces[1], strict));
+		}
+
+		if (serializedOne.indexOf('<') >= 0) {
+			let pieces = serializedOne.split('<');
+			return ContextKeyLessExpr.create(pieces[0].trim(), this._deserializeValue(pieces[1], strict));
 		}
 
 		if (/^\!\s*/.test(serializedOne)) {
@@ -461,6 +503,278 @@ export class ContextKeyNotEqualsExpr implements IContextKeyExpression {
 
 	public negate(): ContextKeyExpression {
 		return ContextKeyEqualsExpr.create(this.key, this.value);
+	}
+}
+
+export class ContextKeyGreaterOrEqualsExpr implements IContextKeyExpression {
+
+	public static create(key: string, value: any): ContextKeyExpression {
+		if (typeof value === 'boolean') {
+			return (value ? ContextKeyDefinedExpr.create(key) : ContextKeyNotExpr.create(key));
+		}
+		const staticValue = STATIC_VALUES.get(key);
+		if (typeof staticValue === 'boolean') {
+			const trueValue = staticValue ? 'true' : 'false';
+			return (value === trueValue ? ContextKeyTrueExpr.INSTANCE : ContextKeyFalseExpr.INSTANCE);
+		}
+		return new ContextKeyGreaterOrEqualsExpr(key, value);
+	}
+
+	public readonly type = ContextKeyExprType.GreaterOrEquals;
+
+	private constructor(private readonly key: string, private readonly value: any) {
+	}
+
+	public cmp(other: ContextKeyExpression): number {
+		if (other.type !== this.type) {
+			return this.type - other.type;
+		}
+		if (this.key < other.key) {
+			return -1;
+		}
+		if (this.key > other.key) {
+			return 1;
+		}
+		if (this.value < other.value) {
+			return -1;
+		}
+		if (this.value > other.value) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public equals(other: ContextKeyExpression): boolean {
+		if (other.type === this.type) {
+			return (this.key === other.key && this.value === other.value);
+		}
+		return false;
+	}
+
+	public evaluate(context: IContext): boolean {
+		// Intentional ==
+		// eslint-disable-next-line eqeqeq
+		return (Number(context.getValue(this.key)) >= this.value);
+	}
+
+	public serialize(): string {
+		return this.key + ' == \'' + this.value + '\'';
+	}
+
+	public keys(): string[] {
+		return [this.key];
+	}
+
+	public map(mapFnc: IContextKeyExprMapper): ContextKeyExpression {
+		return mapFnc.mapEquals(this.key, this.value);
+	}
+
+	public negate(): ContextKeyExpression {
+		return ContextKeyNotEqualsExpr.create(this.key, this.value);
+	}
+}
+
+export class ContextKeyGreaterExpr implements IContextKeyExpression {
+
+	public static create(key: string, value: any): ContextKeyExpression {
+		if (typeof value === 'boolean') {
+			return (value ? ContextKeyDefinedExpr.create(key) : ContextKeyNotExpr.create(key));
+		}
+		const staticValue = STATIC_VALUES.get(key);
+		if (typeof staticValue === 'boolean') {
+			const trueValue = staticValue ? 'true' : 'false';
+			return (value === trueValue ? ContextKeyTrueExpr.INSTANCE : ContextKeyFalseExpr.INSTANCE);
+		}
+		return new ContextKeyGreaterExpr(key, value);
+	}
+
+	public readonly type = ContextKeyExprType.Greater;
+
+	private constructor(private readonly key: string, private readonly value: any) {
+	}
+
+	public cmp(other: ContextKeyExpression): number {
+		if (other.type !== this.type) {
+			return this.type - other.type;
+		}
+		if (this.key < other.key) {
+			return -1;
+		}
+		if (this.key > other.key) {
+			return 1;
+		}
+		if (this.value < other.value) {
+			return -1;
+		}
+		if (this.value > other.value) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public equals(other: ContextKeyExpression): boolean {
+		if (other.type === this.type) {
+			return (this.key === other.key && this.value === other.value);
+		}
+		return false;
+	}
+
+	public evaluate(context: IContext): boolean {
+		// Intentional ==
+		// eslint-disable-next-line eqeqeq
+		return (Number(context.getValue(this.key)) > this.value);
+	}
+
+	public serialize(): string {
+		return this.key + ' == \'' + this.value + '\'';
+	}
+
+	public keys(): string[] {
+		return [this.key];
+	}
+
+	public map(mapFnc: IContextKeyExprMapper): ContextKeyExpression {
+		return mapFnc.mapEquals(this.key, this.value);
+	}
+
+	public negate(): ContextKeyExpression {
+		return ContextKeyNotEqualsExpr.create(this.key, this.value);
+	}
+}
+
+export class ContextKeyLessExpr implements IContextKeyExpression {
+
+	public static create(key: string, value: any): ContextKeyExpression {
+		if (typeof value === 'boolean') {
+			return (value ? ContextKeyDefinedExpr.create(key) : ContextKeyNotExpr.create(key));
+		}
+		const staticValue = STATIC_VALUES.get(key);
+		if (typeof staticValue === 'boolean') {
+			const trueValue = staticValue ? 'true' : 'false';
+			return (value === trueValue ? ContextKeyTrueExpr.INSTANCE : ContextKeyFalseExpr.INSTANCE);
+		}
+		return new ContextKeyLessExpr(key, value);
+	}
+
+	public readonly type = ContextKeyExprType.Less;
+
+	private constructor(private readonly key: string, private readonly value: any) {
+	}
+
+	public cmp(other: ContextKeyExpression): number {
+		if (other.type !== this.type) {
+			return this.type - other.type;
+		}
+		if (this.key < other.key) {
+			return -1;
+		}
+		if (this.key > other.key) {
+			return 1;
+		}
+		if (this.value < other.value) {
+			return -1;
+		}
+		if (this.value > other.value) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public equals(other: ContextKeyExpression): boolean {
+		if (other.type === this.type) {
+			return (this.key === other.key && this.value === other.value);
+		}
+		return false;
+	}
+
+	public evaluate(context: IContext): boolean {
+		// Intentional ==
+		// eslint-disable-next-line eqeqeq
+		return (Number(context.getValue(this.key)) < this.value);
+	}
+
+	public serialize(): string {
+		return this.key + ' == \'' + this.value + '\'';
+	}
+
+	public keys(): string[] {
+		return [this.key];
+	}
+
+	public map(mapFnc: IContextKeyExprMapper): ContextKeyExpression {
+		return mapFnc.mapEquals(this.key, this.value);
+	}
+
+	public negate(): ContextKeyExpression {
+		return ContextKeyNotEqualsExpr.create(this.key, this.value);
+	}
+}
+
+export class ContextKeyLessOrEqualsExpr implements IContextKeyExpression {
+
+	public static create(key: string, value: any): ContextKeyExpression {
+		if (typeof value === 'boolean') {
+			return (value ? ContextKeyDefinedExpr.create(key) : ContextKeyNotExpr.create(key));
+		}
+		const staticValue = STATIC_VALUES.get(key);
+		if (typeof staticValue === 'boolean') {
+			const trueValue = staticValue ? 'true' : 'false';
+			return (value === trueValue ? ContextKeyTrueExpr.INSTANCE : ContextKeyFalseExpr.INSTANCE);
+		}
+		return new ContextKeyLessOrEqualsExpr(key, value);
+	}
+
+	public readonly type = ContextKeyExprType.LessOrEquals;
+
+	private constructor(private readonly key: string, private readonly value: any) {
+	}
+
+	public cmp(other: ContextKeyExpression): number {
+		if (other.type !== this.type) {
+			return this.type - other.type;
+		}
+		if (this.key < other.key) {
+			return -1;
+		}
+		if (this.key > other.key) {
+			return 1;
+		}
+		if (this.value < other.value) {
+			return -1;
+		}
+		if (this.value > other.value) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public equals(other: ContextKeyExpression): boolean {
+		if (other.type === this.type) {
+			return (this.key === other.key && this.value === other.value);
+		}
+		return false;
+	}
+
+	public evaluate(context: IContext): boolean {
+		// Intentional ==
+		// eslint-disable-next-line eqeqeq
+		return (Number(context.getValue(this.key)) <= this.value);
+	}
+
+	public serialize(): string {
+		return this.key + ' == \'' + this.value + '\'';
+	}
+
+	public keys(): string[] {
+		return [this.key];
+	}
+
+	public map(mapFnc: IContextKeyExprMapper): ContextKeyExpression {
+		return mapFnc.mapEquals(this.key, this.value);
+	}
+
+	public negate(): ContextKeyExpression {
+		return ContextKeyNotEqualsExpr.create(this.key, this.value);
 	}
 }
 
