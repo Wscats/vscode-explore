@@ -49,6 +49,7 @@
                 "publisher": "tencent",
                 "license": "MIT",
                 "contributes": {
+                    "menuConfig":[],
                     "PcShortToolbarButtonConfig": [
                         "undo",
                         "redo",

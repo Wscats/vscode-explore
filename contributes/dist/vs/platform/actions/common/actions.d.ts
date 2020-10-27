@@ -16,6 +16,7 @@ export declare type Icon = {
 } | ThemeIcon;
 export interface ICommandAction {
     id: string;
+    command: string;
     title: string | ILocalizedString;
     category?: string | ILocalizedString;
     tooltip?: string | ILocalizedString;

@@ -8,6 +8,7 @@ import { IExtensionPointUser, ExtensionMessageCollector, ExtensionsRegistry } fr
 export namespace schema {
     export interface IToolbarRegistrations {
         id: string;
+        command: string;
         alt?: string;
         when?: ContextKeyExpression;
         group?: string;

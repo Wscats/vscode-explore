@@ -4,6 +4,7 @@ import { ExtensionMessageCollector } from './vs/workbench/services/extensions/co
 export declare namespace schema {
     interface IToolbarRegistrations {
         id: string;
+        command: string;
         alt?: string;
         when?: ContextKeyExpression;
         group?: string;

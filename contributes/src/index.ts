@@ -8,11 +8,11 @@ import { ContextKeyExpr, ContextKeyExpression, IContextKeyService } from './vs/p
 import { MenuId, MenuRegistry, ILocalizedString, IMenuItem, ICommandAction } from './vs/platform/actions/common/actions';
 import { ServiceCollection } from './vs/platform/instantiation/common/serviceCollection';
 import { KeybindingResolver } from './vs/platform/keybinding/common/keybindingResolver';
+import context from './context';
 // @ts-ignore
 import config from './config.json';
-import { _commandRegistrations } from './register';
-console.log(_commandRegistrations);
-// export { ToolbarsContribution, PcShortToolbarButtonConfig };
+import './register';
+
 const hasOwnProperty = Object.hasOwnProperty;
 function _doHandleExtensionPoints(affectedExtensions: IExtensionDescription[]): void {
     console.log('-----------_doHandleExtensionPoints------------');
@@ -74,34 +74,17 @@ const descriptions = staticExtensions.map(data => <IExtensionDescription>{
 // 处理所有插件配置项
 _doHandleExtensionPoints(descriptions);
 
-class Context {
-    private readonly _values = new Map<string, any>();
-    getValue(key: string): any {
-        if (this._values.has(key)) {
-            return this._values.get(key);
-        }
-    }
-    setValue(key: string, value: any) {
-        this._values.set(key, value);
-    }
-}
-
-const context = new Context();
-context.setValue('platform', 'pc');
-context.setValue('scmProvider', 'git');
-context.setValue('scmResourceGroup', 'merge');
-context.setValue('window.innerWidth', window.innerWidth);
-context.setValue('SpreadsheetApp.sheetStatus.rangesStatus.status.canEdit', false);
-
+console.log(MenuRegistry);
 console.log(context);
 
 for (const commandId of MenuRegistry.getCommands().keys()) {
     let item = MenuRegistry.getCommand(commandId);
     console.log(item, contextMatchesRules(item?.when));
     if (contextMatchesRules(item?.when)) {
-
+        
     }
 }
+
 
 
 function contextMatchesRules(rules: ContextKeyExpression | undefined): boolean {

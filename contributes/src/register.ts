@@ -6,8 +6,7 @@ import { MenuId, MenuRegistry, ILocalizedString, IMenuItem, ICommandAction } fro
 import { URI } from './vs/base/common/uri';
 import { localize } from './vs/nls';
 
-export const _commandRegistrations = new DisposableStore();
-
+const _commandRegistrations = new DisposableStore();
 ExtensionsRegistry.registerExtensionPoint<schema.IUserFriendlyCommand | schema.IUserFriendlyCommand[]>({
     extensionPoint: 'ToolbarsContribution',
     jsonSchema: schema.toolbarsContribution
@@ -24,6 +23,7 @@ ExtensionsRegistry.registerExtensionPoint<schema.IUserFriendlyCommand | schema.I
         }
         bucket.push({
             id: command,
+            command,
             alt,
             group,
             component,
@@ -48,21 +48,28 @@ ExtensionsRegistry.registerExtensionPoint<schema.IUserFriendlyCommand | schema.I
     _commandRegistrations.add(MenuRegistry.addCommands(newCommands));
 });
 
-console.log(_commandRegistrations);
-
+const _menuRegistrations = new DisposableStore();
 ExtensionsRegistry.registerExtensionPoint<string[]>({
     extensionPoint: 'PcShortToolbarButtonConfig',
     jsonSchema: schema.toolbarsContribution
 }).setHandler((extensions: readonly IExtensionPointUser<string[]>[]) => {
-    let PcShortToolbarButtonConfig: string[] = [];
+    // remove all previous menu registrations
+    _menuRegistrations.clear();
+
     console.log('-----------PcShortToolbarButtonConfig------------');
-    console.log(extensions);
     for (let i = 0, len = extensions.length; i < len; i++) {
         let extension = extensions[i];
-        console.log(extension);
         for (let j = 0, lenJ = extension.value.length; j < lenJ; j++) {
             let ext = extension.value[j];
-            PcShortToolbarButtonConfig.push(ext);
+            _menuRegistrations.add(MenuRegistry.appendMenuItem(MenuId.CommandPalette, {
+                group: '5_infile_nav',
+                command: {
+                    id: 'editor.action.jumpToBracket',
+                    title: '&& denotes a mnemonic',
+                    command: ''
+                },
+                order: 2
+            }));
         }
     }
 });
