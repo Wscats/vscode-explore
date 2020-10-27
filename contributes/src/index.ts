@@ -81,7 +81,11 @@ for (const commandId of MenuRegistry.getCommands().keys()) {
     let item = MenuRegistry.getCommand(commandId);
     console.log(item, contextMatchesRules(item?.when));
     if (contextMatchesRules(item?.when)) {
-        
+        const button = document.createElement('button');
+        if (item?.command) {
+            button.innerHTML = item?.command;
+        }
+        document.body.appendChild(button);
     }
 }
 
