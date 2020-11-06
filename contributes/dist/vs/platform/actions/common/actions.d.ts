@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 import { ContextKeyExpression } from '../../../platform/contextkey/common/contextkey';
 import { IDisposable } from '../../../base/common/lifecycle';
 import { Event } from '../../../base/common/event';

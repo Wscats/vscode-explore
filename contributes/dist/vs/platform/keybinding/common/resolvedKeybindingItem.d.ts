@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 import { ResolvedKeybinding } from '../../../base/common/keyCodes';
 import { ContextKeyExpression } from '../../../platform/contextkey/common/contextkey';
 export declare class ResolvedKeybindingItem {

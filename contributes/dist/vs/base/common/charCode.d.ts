@@ -1,4 +1,8 @@
 /**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
+/**
  * An inlined enum containing useful character codes (to be used with String.charCodeAt).
  * Please leave the const keyword such that it gets inlined when compiled to JavaScript!
  */

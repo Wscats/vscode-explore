@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 import { CancellationToken } from './cancellation';
 /**
  * A Pager is a stateless abstraction over a paged collection.

@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 export declare const enum Constants {
     /**
      * MAX SMI (SMall Integer) as defined in v8.

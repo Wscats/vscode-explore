@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 import { IContext, ContextKeyExpression } from '../../../platform/contextkey/common/contextkey';
 import { ResolvedKeybindingItem } from '../../../platform/keybinding/common/resolvedKeybindingItem';
 export interface IResolveResult {

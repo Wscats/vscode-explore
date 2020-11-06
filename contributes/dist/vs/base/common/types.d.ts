@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 import { URI, UriComponents } from './uri';
 /**
  * @returns whether the provided parameter is a JavaScript Array or not.

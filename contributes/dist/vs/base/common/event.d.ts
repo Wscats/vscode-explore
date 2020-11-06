@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 import { IDisposable, DisposableStore } from './lifecycle';
 import { LinkedList } from './linkedList';
 import { CancellationToken } from './cancellation';

@@ -1,0 +1,34 @@
+{
+    "name": "toolbarConfig",
+    "displayName": "腾讯文档工具栏",
+    "description": "工具栏",
+    "version": "1.0.0",
+    "publisher": "enoyao",
+    "license": "MIT",
+    "contributes": [
+        {
+            "command": "undo",
+            "when": "window.innerWidth < 855  || window.innerWidth < 1440 && window.innerWidth >= 855 || window.innerWidth >= 1440"
+        },
+        {
+            "command": "redo",
+            "canEdit": {
+                "name": "test",
+                "when": "window.innerWidth >= 900 && isMore == true && platform == 'pc'"
+            },
+            "when": "window.innerWidth >= 900 && isMore == true && platform == 'pc'"
+        },
+        {
+            "command": "format",
+            "when": "window.innerWidth >= 900 && isMore == true"
+        },
+        {
+            "command": "clear-format",
+            "when": "window.innerWidth >= 900 && isMore == false"
+        },
+        {
+            "command": "insert-group",
+            "when": "window.innerWidth >= 900 && isMore == false"
+        }
+    ]
+}

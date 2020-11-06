@@ -1,3 +1,8 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
+
 class Context {
     private readonly _values = new Map<string, any>();
     getValue(key: string): any {

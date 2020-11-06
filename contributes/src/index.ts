@@ -1,12 +1,14 @@
-import { ExtensionsRegistry, ExtensionMessageCollector, ExtensionPoint, IExtensionPoint, IExtensionPointUser } from './vs/workbench/services/extensions/common/extensionsRegistry';
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
+
+import { ExtensionsRegistry, ExtensionMessageCollector, ExtensionPoint, IExtensionPointUser } from './vs/workbench/services/extensions/common/extensionsRegistry';
 import { IExtensionManifest, ExtensionIdentifier, IExtensionDescription, } from './vs/platform/extensions/common/extensions';
-import { ActivationTimes, ExtensionPointContribution, IExtensionService, IExtensionsStatus, IMessage, IWillActivateEvent, IResponsiveStateChangeEvent, toExtension } from './vs/workbench/services/extensions/common/extensions';
-import { localize } from './vs/nls';
-import { IJSONSchema } from './vs/base/common/jsonSchema';
+import { IMessage } from './vs/workbench/services/extensions/common/extensions';
 import { URI } from './vs/base/common/uri';
-import { ContextKeyExpr, ContextKeyExpression, IContextKeyService } from './vs/platform/contextkey/common/contextkey';
-import { MenuId, MenuRegistry, ILocalizedString, IMenuItem, ICommandAction } from './vs/platform/actions/common/actions';
-import { ServiceCollection } from './vs/platform/instantiation/common/serviceCollection';
+import { ContextKeyExpression } from './vs/platform/contextkey/common/contextkey';
+import { MenuId, MenuRegistry } from './vs/platform/actions/common/actions';
 import { KeybindingResolver } from './vs/platform/keybinding/common/keybindingResolver';
 import context from './context';
 // @ts-ignore
@@ -76,6 +78,7 @@ _doHandleExtensionPoints(descriptions);
 
 console.log(MenuRegistry);
 console.log(context);
+console.log(MenuRegistry.getMenuItems(MenuId.CommandPalette))
 
 for (const commandId of MenuRegistry.getCommands().keys()) {
     let item = MenuRegistry.getCommand(commandId);
@@ -88,7 +91,6 @@ for (const commandId of MenuRegistry.getCommands().keys()) {
         document.body.appendChild(button);
     }
 }
-
 
 
 function contextMatchesRules(rules: ContextKeyExpression | undefined): boolean {

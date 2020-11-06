@@ -1,4 +1,8 @@
 /**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
+/**
  * Uniform Resource Identifier (URI) http://tools.ietf.org/html/rfc3986.
  * This class is a simple parser which creates the basic component parts
  * (http://tools.ietf.org/html/rfc3986#section-3) with minimal validation
@@ -121,7 +125,6 @@ export declare class URI implements UriComponents {
      * @param pathFragment The path fragment to add to the URI path.
      * @returns The resulting URI.
      */
-    static joinPath(uri: URI, ...pathFragment: string[]): URI;
     /**
      * Creates a string representation for this URI. It's guaranteed that calling
      * `URI.parse` with the result of this function creates an URI which is equal

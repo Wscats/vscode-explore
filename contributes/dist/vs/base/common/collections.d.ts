@@ -1,4 +1,8 @@
 /**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
+/**
  * An interface for a JavaScript object that
  * acts a dictionary. The keys are strings.
  */

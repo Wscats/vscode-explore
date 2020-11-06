@@ -1,13 +1,11 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 
 import { Event } from '../../../../base/common/event';
 import Severity from '../../../../base/common/severity';
 import { URI } from '../../../../base/common/uri';
-import { createDecorator } from '../../../../platform/instantiation/common/instantiation';
-import { IExtensionPoint } from '../../../../workbench/services/extensions/common/extensionsRegistry';
 import { ExtensionIdentifier, IExtension, ExtensionType, IExtensionDescription } from '../../../../platform/extensions/common/extensions';
 import { getGalleryExtensionId } from '../../../../platform/extensionManagement/common/extensionManagementUtil';
 import { IMessagePassingProtocol } from '../../../../base/parts/ipc/common/ipc';
@@ -24,7 +22,6 @@ export const nullExtensionDescription = Object.freeze(<IExtensionDescription>{
 	isBuiltin: false,
 });
 
-export const IExtensionService = createDecorator<IExtensionService>('extensionService');
 
 export interface IMessage {
 	type: Severity;
@@ -130,109 +127,7 @@ export interface IResponsiveStateChangeEvent {
 	isResponsive: boolean;
 }
 
-export interface IExtensionService {
-	_serviceBrand: undefined;
 
-	/**
-	 * An event emitted when extensions are registered after their extension points got handled.
-	 *
-	 * This event will also fire on startup to signal the installed extensions.
-	 *
-	 * @returns the extensions that got registered
-	 */
-	onDidRegisterExtensions: Event<void>;
-
-	/**
-	 * @event
-	 * Fired when extensions status changes.
-	 * The event contains the ids of the extensions that have changed.
-	 */
-	onDidChangeExtensionsStatus: Event<ExtensionIdentifier[]>;
-
-	/**
-	 * Fired when the available extensions change (i.e. when extensions are added or removed).
-	 */
-	onDidChangeExtensions: Event<void>;
-
-	/**
-	 * An event that is fired when activation happens.
-	 */
-	onWillActivateByEvent: Event<IWillActivateEvent>;
-
-	/**
-	 * An event that is fired when an extension host changes its
-	 * responsive-state.
-	 */
-	onDidChangeResponsiveChange: Event<IResponsiveStateChangeEvent>;
-
-	/**
-	 * Send an activation event and activate interested extensions.
-	 */
-	activateByEvent(activationEvent: string): Promise<void>;
-
-	/**
-	 * An promise that resolves when the installed extensions are registered after
-	 * their extension points got handled.
-	 */
-	whenInstalledExtensionsRegistered(): Promise<boolean>;
-
-	/**
-	 * Return all registered extensions
-	 */
-	getExtensions(): Promise<IExtensionDescription[]>;
-
-	/**
-	 * Return a specific extension
-	 * @param id An extension id
-	 */
-	getExtension(id: string): Promise<IExtensionDescription | undefined>;
-
-	/**
-	 * Returns `true` if the given extension can be added. Otherwise `false`.
-	 * @param extension An extension
-	 */
-	canAddExtension(extension: IExtensionDescription): boolean;
-
-	/**
-	 * Returns `true` if the given extension can be removed. Otherwise `false`.
-	 * @param extension An extension
-	 */
-	canRemoveExtension(extension: IExtensionDescription): boolean;
-
-	/**
-	 * Read all contributions to an extension point.
-	 */
-	readExtensionPointContributions<T>(extPoint: IExtensionPoint<T>): Promise<ExtensionPointContribution<T>[]>;
-
-	/**
-	 * Get information about extensions status.
-	 */
-	getExtensionsStatus(): { [id: string]: IExtensionsStatus };
-
-	/**
-	 * Return the inspect port or `0`, the latter means inspection
-	 * is not possible.
-	 */
-	getInspectPort(tryEnableInspector: boolean): Promise<number>;
-
-	/**
-	 * Restarts the extension host.
-	 */
-	restartExtensionHost(): void;
-
-	/**
-	 * Modify the environment of the remote extension host
-	 * @param env New properties for the remote extension host
-	 */
-	setRemoteEnvironment(env: { [key: string]: string | null }): Promise<void>;
-
-	_logOrShowMessage(severity: Severity, msg: string): void;
-	_activateById(extensionId: ExtensionIdentifier, reason: ExtensionActivationReason): Promise<void>;
-	_onWillActivateExtension(extensionId: ExtensionIdentifier): void;
-	_onDidActivateExtension(extensionId: ExtensionIdentifier, codeLoadingTime: number, activateCallTime: number, activateResolvedTime: number, activationReason: ExtensionActivationReason): void;
-	_onExtensionRuntimeError(extensionId: ExtensionIdentifier, err: Error): void;
-	_onExtensionHostExit(code: number): void;
-}
 
 export interface ProfileSession {
 	stop(): Promise<IExtensionHostProfile>;
@@ -255,31 +150,4 @@ export function toExtension(extensionDescription: IExtensionDescription): IExten
 		manifest: extensionDescription,
 		location: extensionDescription.extensionLocation,
 	};
-}
-
-
-export class NullExtensionService implements IExtensionService {
-	_serviceBrand: undefined;
-	onDidRegisterExtensions: Event<void> = Event.None;
-	onDidChangeExtensionsStatus: Event<ExtensionIdentifier[]> = Event.None;
-	onDidChangeExtensions: Event<void> = Event.None;
-	onWillActivateByEvent: Event<IWillActivateEvent> = Event.None;
-	onDidChangeResponsiveChange: Event<IResponsiveStateChangeEvent> = Event.None;
-	activateByEvent(_activationEvent: string): Promise<void> { return Promise.resolve(undefined); }
-	whenInstalledExtensionsRegistered(): Promise<boolean> { return Promise.resolve(true); }
-	getExtensions(): Promise<IExtensionDescription[]> { return Promise.resolve([]); }
-	getExtension() { return Promise.resolve(undefined); }
-	readExtensionPointContributions<T>(_extPoint: IExtensionPoint<T>): Promise<ExtensionPointContribution<T>[]> { return Promise.resolve(Object.create(null)); }
-	getExtensionsStatus(): { [id: string]: IExtensionsStatus; } { return Object.create(null); }
-	getInspectPort(_tryEnableInspector: boolean): Promise<number> { return Promise.resolve(0); }
-	restartExtensionHost(): void { }
-	async setRemoteEnvironment(_env: { [key: string]: string | null }): Promise<void> { }
-	canAddExtension(): boolean { return false; }
-	canRemoveExtension(): boolean { return false; }
-	_logOrShowMessage(_severity: Severity, _msg: string): void { }
-	_activateById(_extensionId: ExtensionIdentifier, _reason: ExtensionActivationReason): Promise<void> { return Promise.resolve(); }
-	_onWillActivateExtension(_extensionId: ExtensionIdentifier): void { }
-	_onDidActivateExtension(_extensionId: ExtensionIdentifier, _codeLoadingTime: number, _activateCallTime: number, _activateResolvedTime: number, _activationReason: ExtensionActivationReason): void { }
-	_onExtensionRuntimeError(_extensionId: ExtensionIdentifier, _err: Error): void { }
-	_onExtensionHostExit(code: number): void { }
 }

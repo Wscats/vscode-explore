@@ -1,11 +1,10 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 
 import { isWindows } from './platform';
 import { CharCode } from './charCode';
-import * as paths from './path';
 
 const _schemePattern = /^\w[\w\d+.-]*$/;
 const _singleSlashStart = /^\//;
@@ -343,18 +342,6 @@ export class URI implements UriComponents {
 	 * @param pathFragment The path fragment to add to the URI path.
 	 * @returns The resulting URI.
 	 */
-	static joinPath(uri: URI, ...pathFragment: string[]): URI {
-		if (!uri.path) {
-			throw new Error(`[UriError]: cannot call joinPaths on URI without path`);
-		}
-		let newPath: string;
-		if (isWindows && uri.scheme === 'file') {
-			newPath = URI.file(paths.win32.join(uriToFsPath(uri, true), ...pathFragment)).path;
-		} else {
-			newPath = paths.posix.join(uri.path, ...pathFragment);
-		}
-		return uri.with({ path: newPath });
-	}
 
 	// ---- printing/externalize ---------------------------
 

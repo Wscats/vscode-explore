@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 export interface IRegistry {
     /**
      * Adds the extension functions and properties defined by data to the

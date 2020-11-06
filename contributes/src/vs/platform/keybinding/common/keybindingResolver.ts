@@ -1,14 +1,10 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 
-import { isNonEmptyArray } from '../../../base/common/arrays';
-import { MenuRegistry } from '../../../platform/actions/common/actions';
-// import { CommandsRegistry, ICommandHandlerDescription } from '../../../platform/commands/common/commands';
 import { IContext, ContextKeyExpression, ContextKeyExprType } from '../../../platform/contextkey/common/contextkey';
 import { ResolvedKeybindingItem } from '../../../platform/keybinding/common/resolvedKeybindingItem';
-import { keys } from '../../../base/common/map';
 
 export interface IResolveResult {
 	/** Whether the resolved keybinding is entering a chord */
@@ -329,37 +325,4 @@ export class KeybindingResolver {
 		}
 		return rules.evaluate(context);
 	}
-
-	// public static getAllUnboundCommands(boundCommands: Map<string, boolean>): string[] {
-	// 	const unboundCommands: string[] = [];
-	// 	const seenMap: Map<string, boolean> = new Map<string, boolean>();
-	// 	const addCommand = (id: string, includeCommandWithArgs: boolean) => {
-	// 		if (seenMap.has(id)) {
-	// 			return;
-	// 		}
-	// 		seenMap.set(id, true);
-	// 		if (id[0] === '_' || id.indexOf('vscode.') === 0) { // private command
-	// 			return;
-	// 		}
-	// 		if (boundCommands.get(id) === true) {
-	// 			return;
-	// 		}
-	// 		if (!includeCommandWithArgs) {
-	// 			// const command = CommandsRegistry.getCommand(id);
-	// 			if (command && typeof command.description === 'object'
-	// 				&& isNonEmptyArray((<ICommandHandlerDescription>command.description).args)) { // command with args
-	// 				return;
-	// 			}
-	// 		}
-	// 		unboundCommands.push(id);
-	// 	};
-	// 	for (const id of keys(MenuRegistry.getCommands())) {
-	// 		addCommand(id, true);
-	// 	}
-	// 	for (const id of keys(CommandsRegistry.getCommands())) {
-	// 		addCommand(id, false);
-	// 	}
-
-	// 	return unboundCommands;
-	// }
 }

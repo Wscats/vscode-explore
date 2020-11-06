@@ -1,4 +1,7 @@
-import { Event } from '../../../base/common/event';
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 export interface ILocalization {
     languageId: string;
     languageName?: string;
@@ -12,14 +15,3 @@ export interface ITranslation {
     id: string;
     path: string;
 }
-export declare const enum LanguageType {
-    Core = 1,
-    Contributed = 2
-}
-export declare const ILocalizationsService: import("../../instantiation/common/instantiation").ServiceIdentifier<ILocalizationsService>;
-export interface ILocalizationsService {
-    _serviceBrand: undefined;
-    readonly onDidLanguagesChange: Event<void>;
-    getLanguageIds(type?: LanguageType): Promise<string[]>;
-}
-export declare function isValidLocalization(localization: ILocalization): boolean;

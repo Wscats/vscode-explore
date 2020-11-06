@@ -1,4 +1,7 @@
-import * as streams from './stream';
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 export declare class VSBuffer {
     static alloc(byteLength: number): VSBuffer;
     static wrap(actual: Uint8Array): VSBuffer;
@@ -26,15 +29,3 @@ export declare function readUInt32LE(source: Uint8Array, offset: number): number
 export declare function writeUInt32LE(destination: Uint8Array, value: number, offset: number): void;
 export declare function readUInt8(source: Uint8Array, offset: number): number;
 export declare function writeUInt8(destination: Uint8Array, value: number, offset: number): void;
-export interface VSBufferReadable extends streams.Readable<VSBuffer> {
-}
-export interface VSBufferReadableStream extends streams.ReadableStream<VSBuffer> {
-}
-export interface VSBufferWriteableStream extends streams.WriteableStream<VSBuffer> {
-}
-export declare function readableToBuffer(readable: VSBufferReadable): VSBuffer;
-export declare function bufferToReadable(buffer: VSBuffer): VSBufferReadable;
-export declare function streamToBuffer(stream: streams.ReadableStream<VSBuffer>): Promise<VSBuffer>;
-export declare function bufferToStream(buffer: VSBuffer): streams.ReadableStream<VSBuffer>;
-export declare function streamToBufferReadableStream(stream: streams.ReadableStreamEvents<Uint8Array | string>): streams.ReadableStream<VSBuffer>;
-export declare function newWriteableBufferStream(): streams.WriteableStream<VSBuffer>;

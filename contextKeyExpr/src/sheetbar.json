@@ -1,0 +1,14 @@
+{
+    "name": "sheetbarConfig",
+    "displayName": "腾讯文档底部栏",
+    "description": "底部栏",
+    "version": "1.0.0",
+    "publisher": "enoyao",
+    "license": "MIT",
+    "contributes": [
+        {
+            "command": "undo",
+            "when": "1 == 1"
+        }
+    ]
+}

@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 import { IJSONSchema } from '../../../../base/common/jsonSchema';
 import { IMessage } from './extensions';
 import { IExtensionDescription } from '../../../../platform/extensions/common/extensions';

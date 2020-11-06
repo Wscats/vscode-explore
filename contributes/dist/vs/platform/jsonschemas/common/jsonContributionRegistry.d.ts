@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 import { IJSONSchema } from '../../../base/common/jsonSchema';
 import { Event } from '../../../base/common/event';
 export declare const Extensions: {

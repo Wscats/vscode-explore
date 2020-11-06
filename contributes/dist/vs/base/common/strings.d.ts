@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 export declare function isFalsyOrWhitespace(str: string | undefined): boolean;
 /**
  * @deprecated ES6: use `String.padStart`

@@ -1,11 +1,9 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 
-import { Event } from '../../../base/common/event';
 import { isFalsyOrWhitespace } from '../../../base/common/strings';
-import { createDecorator } from '../../../platform/instantiation/common/instantiation';
 import { isMacintosh, isLinux, isWindows, isWeb } from '../../../base/common/platform';
 
 const STATIC_VALUES = new Map<string, boolean>();
@@ -1229,35 +1227,7 @@ export class ContextKeyOrExpr implements IContextKeyExpression {
 	}
 }
 
-export class RawContextKey<T> extends ContextKeyDefinedExpr {
 
-	private readonly _defaultValue: T | undefined;
-
-	constructor(key: string, defaultValue: T | undefined) {
-		super(key);
-		this._defaultValue = defaultValue;
-	}
-
-	public bindTo(target: IContextKeyService): IContextKey<T> {
-		return target.createKey(this.key, this._defaultValue);
-	}
-
-	public getValue(target: IContextKeyService): T | undefined {
-		return target.getContextKeyValue<T>(this.key);
-	}
-
-	public toNegated(): ContextKeyExpression {
-		return ContextKeyExpr.not(this.key);
-	}
-
-	public isEqualTo(value: string): ContextKeyExpression {
-		return ContextKeyExpr.equals(this.key, value);
-	}
-
-	public notEqualsTo(value: string): ContextKeyExpression {
-		return ContextKeyExpr.notEquals(this.key, value);
-	}
-}
 
 export interface IContext {
 	getValue<T>(key: string): T | undefined;
@@ -1277,7 +1247,6 @@ export interface IContextKeyServiceTarget {
 	getAttribute(attr: string): string | null;
 }
 
-export const IContextKeyService = createDecorator<IContextKeyService>('contextKeyService');
 
 export interface IReadableSet<T> {
 	has(value: T): boolean;
@@ -1287,20 +1256,5 @@ export interface IContextKeyChangeEvent {
 	affectsSome(keys: IReadableSet<string>): boolean;
 }
 
-export interface IContextKeyService {
-	_serviceBrand: undefined;
-	dispose(): void;
-
-	onDidChangeContext: Event<IContextKeyChangeEvent>;
-	bufferChangeEvents(callback: Function): void;
-
-
-	createKey<T>(key: string, defaultValue: T | undefined): IContextKey<T>;
-	contextMatchesRules(rules: ContextKeyExpression | undefined): boolean;
-	getContextKeyValue<T>(key: string): T | undefined;
-
-	createScoped(target?: IContextKeyServiceTarget): IContextKeyService;
-	getContext(target: IContextKeyServiceTarget | null): IContext;
-}
 
 export const SET_CONTEXT_COMMAND_ID = 'setContext';

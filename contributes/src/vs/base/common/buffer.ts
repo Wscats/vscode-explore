@@ -1,10 +1,9 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 
 import * as strings from './strings';
-import * as streams from './stream';
 
 declare const Buffer: any;
 
@@ -188,32 +187,3 @@ export function writeUInt8(destination: Uint8Array, value: number, offset: numbe
 	destination[offset] = value;
 }
 
-export interface VSBufferReadable extends streams.Readable<VSBuffer> { }
-
-export interface VSBufferReadableStream extends streams.ReadableStream<VSBuffer> { }
-
-export interface VSBufferWriteableStream extends streams.WriteableStream<VSBuffer> { }
-
-export function readableToBuffer(readable: VSBufferReadable): VSBuffer {
-	return streams.consumeReadable<VSBuffer>(readable, chunks => VSBuffer.concat(chunks));
-}
-
-export function bufferToReadable(buffer: VSBuffer): VSBufferReadable {
-	return streams.toReadable<VSBuffer>(buffer);
-}
-
-export function streamToBuffer(stream: streams.ReadableStream<VSBuffer>): Promise<VSBuffer> {
-	return streams.consumeStream<VSBuffer>(stream, chunks => VSBuffer.concat(chunks));
-}
-
-export function bufferToStream(buffer: VSBuffer): streams.ReadableStream<VSBuffer> {
-	return streams.toStream<VSBuffer>(buffer, chunks => VSBuffer.concat(chunks));
-}
-
-export function streamToBufferReadableStream(stream: streams.ReadableStreamEvents<Uint8Array | string>): streams.ReadableStream<VSBuffer> {
-	return streams.transform<Uint8Array | string, VSBuffer>(stream, { data: data => typeof data === 'string' ? VSBuffer.fromString(data) : VSBuffer.wrap(data) }, chunks => VSBuffer.concat(chunks));
-}
-
-export function newWriteableBufferStream(): streams.WriteableStream<VSBuffer> {
-	return streams.newWriteableStream<VSBuffer>(chunks => VSBuffer.concat(chunks));
-}

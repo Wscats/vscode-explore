@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 import { ILocalization } from '../../localizations/common/localizations';
 import { URI } from '../../../base/common/uri';
 export declare const MANIFEST_CACHE_FOLDER = "CachedExtensions";

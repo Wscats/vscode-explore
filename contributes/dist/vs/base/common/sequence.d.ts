@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 import { Event } from './event';
 export interface ISplice<T> {
     readonly start: number;

@@ -1,4 +1,7 @@
-import { Event } from '../../../base/common/event';
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 export declare const enum ContextKeyExprType {
     False = 0,
     True = 1,
@@ -242,15 +245,6 @@ export declare class ContextKeyOrExpr implements IContextKeyExpression {
     map(mapFnc: IContextKeyExprMapper): ContextKeyExpression;
     negate(): ContextKeyExpression;
 }
-export declare class RawContextKey<T> extends ContextKeyDefinedExpr {
-    private readonly _defaultValue;
-    constructor(key: string, defaultValue: T | undefined);
-    bindTo(target: IContextKeyService): IContextKey<T>;
-    getValue(target: IContextKeyService): T | undefined;
-    toNegated(): ContextKeyExpression;
-    isEqualTo(value: string): ContextKeyExpression;
-    notEqualsTo(value: string): ContextKeyExpression;
-}
 export interface IContext {
     getValue<T>(key: string): T | undefined;
 }
@@ -266,22 +260,10 @@ export interface IContextKeyServiceTarget {
     hasAttribute(attr: string): boolean;
     getAttribute(attr: string): string | null;
 }
-export declare const IContextKeyService: import("../../instantiation/common/instantiation").ServiceIdentifier<IContextKeyService>;
 export interface IReadableSet<T> {
     has(value: T): boolean;
 }
 export interface IContextKeyChangeEvent {
     affectsSome(keys: IReadableSet<string>): boolean;
-}
-export interface IContextKeyService {
-    _serviceBrand: undefined;
-    dispose(): void;
-    onDidChangeContext: Event<IContextKeyChangeEvent>;
-    bufferChangeEvents(callback: Function): void;
-    createKey<T>(key: string, defaultValue: T | undefined): IContextKey<T>;
-    contextMatchesRules(rules: ContextKeyExpression | undefined): boolean;
-    getContextKeyValue<T>(key: string): T | undefined;
-    createScoped(target?: IContextKeyServiceTarget): IContextKeyService;
-    getContext(target: IContextKeyServiceTarget | null): IContext;
 }
 export declare const SET_CONTEXT_COMMAND_ID = "setContext";

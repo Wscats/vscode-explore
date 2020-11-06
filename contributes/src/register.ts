@@ -1,10 +1,15 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
+
 import { schema } from './schema';
-import { ExtensionsRegistry, ExtensionMessageCollector, ExtensionPoint, IExtensionPoint, IExtensionPointUser } from './vs/workbench/services/extensions/common/extensionsRegistry';
-import { ContextKeyExpr, ContextKeyExpression } from './vs/platform/contextkey/common/contextkey';
-import { DisposableStore, toDisposable } from './vs/base/common/lifecycle';
-import { MenuId, MenuRegistry, ILocalizedString, IMenuItem, ICommandAction } from './vs/platform/actions/common/actions';
-import { URI } from './vs/base/common/uri';
+import { ExtensionsRegistry, IExtensionPointUser } from './vs/workbench/services/extensions/common/extensionsRegistry';
+import { ContextKeyExpr } from './vs/platform/contextkey/common/contextkey';
+import { DisposableStore } from './vs/base/common/lifecycle';
+import { MenuId, MenuRegistry, IMenuItem, ICommandAction } from './vs/platform/actions/common/actions';
 import { localize } from './vs/nls';
+import { forEach } from './vs/base/common/collections';
 
 const _commandRegistrations = new DisposableStore();
 ExtensionsRegistry.registerExtensionPoint<schema.IUserFriendlyCommand | schema.IUserFriendlyCommand[]>({
@@ -31,7 +36,6 @@ ExtensionsRegistry.registerExtensionPoint<schema.IUserFriendlyCommand | schema.I
         });
     }
 
-    // remove all previous command registrations
     _commandRegistrations.clear();
 
     const newCommands: ICommandAction[] = [];
@@ -49,27 +53,71 @@ ExtensionsRegistry.registerExtensionPoint<schema.IUserFriendlyCommand | schema.I
 });
 
 const _menuRegistrations = new DisposableStore();
-ExtensionsRegistry.registerExtensionPoint<string[]>({
-    extensionPoint: 'PcShortToolbarButtonConfig',
+ExtensionsRegistry.registerExtensionPoint<{ [loc: string]: schema.IUserFriendlyMenuItem[] }>({
+    extensionPoint: 'menus',
     jsonSchema: schema.toolbarsContribution
-}).setHandler((extensions: readonly IExtensionPointUser<string[]>[]) => {
-    // remove all previous menu registrations
+}).setHandler((extensions) => {
     _menuRegistrations.clear();
+    const items: { id: MenuId, item: IMenuItem }[] = [];
+    for (let extension of extensions) {
+        const { value, collector } = extension;
 
-    console.log('-----------PcShortToolbarButtonConfig------------');
-    for (let i = 0, len = extensions.length; i < len; i++) {
-        let extension = extensions[i];
-        for (let j = 0, lenJ = extension.value.length; j < lenJ; j++) {
-            let ext = extension.value[j];
-            _menuRegistrations.add(MenuRegistry.appendMenuItem(MenuId.CommandPalette, {
-                group: '5_infile_nav',
-                command: {
-                    id: 'editor.action.jumpToBracket',
-                    title: '&& denotes a mnemonic',
-                    command: ''
-                },
-                order: 2
-            }));
-        }
+        forEach(value, entry => {
+            if (!schema.isValidMenuItems(entry.value, collector)) {
+                return;
+            }
+
+            const menu = schema.parseMenuId(entry.key);
+            if (typeof menu === 'undefined') {
+                collector.warn(localize('menuId.invalid', "`{0}` is not a valid menu identifier", entry.key));
+                return;
+            }
+
+            if (schema.isProposedAPI(menu) && !extension.description.enableProposedApi) {
+                collector.error(localize('proposedAPI.invalid', "{0} is a proposed menu identifier and is only available when running out of dev or with the following command line switch: --enable-proposed-api {1}", entry.key, extension.description.identifier.value));
+                return;
+            }
+
+            for (let item of entry.value) {
+                let command = MenuRegistry.getCommand(item.command);
+                let alt = item.alt && MenuRegistry.getCommand(item.alt) || undefined;
+
+                if (!command) {
+                    collector.error(localize('missing.command', "Menu item references a command `{0}` which is not defined in the 'commands' section.", item.command));
+                    continue;
+                }
+                if (item.alt && !alt) {
+                    collector.warn(localize('missing.altCommand', "Menu item references an alt-command `{0}` which is not defined in the 'commands' section.", item.alt));
+                }
+                if (item.command === item.alt) {
+                    collector.info(localize('dupe.command', "Menu item references the same command as default and alt-command"));
+                }
+
+                let group: string | undefined;
+                let order: number | undefined;
+                if (item.group) {
+                    const idx = item.group.lastIndexOf('@');
+                    if (idx > 0) {
+                        group = item.group.substr(0, idx);
+                        order = Number(item.group.substr(idx + 1)) || undefined;
+                    } else {
+                        group = item.group;
+                    }
+                }
+
+                items.push({
+                    id: menu,
+                    item: {
+                        command,
+                        alt,
+                        group,
+                        order,
+                        when: ContextKeyExpr.deserialize(item.when)
+                    }
+                });
+            }
+        });
     }
+
+    _menuRegistrations.add(MenuRegistry.appendMenuItems(items));
 });

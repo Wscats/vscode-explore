@@ -1,3 +1,7 @@
+/**
+ * Copyright © 1998 - 2020 Tencent. All Rights Reserved.
+ * @author enoyao
+ */
 export declare namespace Iterable {
     function empty<T = any>(): Iterable<T>;
     function single<T>(element: T): Iterable<T>;

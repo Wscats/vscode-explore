@@ -14,7 +14,7 @@
                             "command": "undo",
                             "component": "Redobutton",
                             "icon": "undo",
-                            "when": "SpreadsheetApp.sheetStatus.rangesStatus.status.canEdit == true && window.innerWidth >= 1080"
+                            "when": "SpreadsheetApp.sheetStatus.rangesStatus.status.canEdit == true || platform == pc && window.innerWidth >= 1080"
                         },
                         {
                             "command": "redo",
@@ -49,7 +49,7 @@
                 "publisher": "tencent",
                 "license": "MIT",
                 "contributes": {
-                    "menuConfig":[],
+                    "menuConfig": [],
                     "PcShortToolbarButtonConfig": [
                         "undo",
                         "redo",
@@ -92,26 +92,26 @@
                 "publisher": "tencent",
                 "license": "MIT",
                 "contributes": {
-                    "PcShortToolbarButtonReadonlyConfig": [
-                        "undo",
-                        "redo",
-                        "format",
-                        "clear-format",
-                        "insert-group",
-                        "number-format",
-                        "decimal",
-                        "font-family",
-                        "font-size",
-                        "bold",
-                        "font-color",
-                        "italics",
-                        "underline",
-                        "strike",
-                        "paint-color",
-                        "border",
-                        "merge-cell",
-                        "search"
-                    ]
+                    "menus": {
+                        "commandPalette": [
+                            {
+                                "command": "undo",
+                                "when": "config.git.enabled && !git.missing"
+                            },
+                            {
+                                "command": "git.clone",
+                                "when": "config.git.enabled && !git.missing"
+                            },
+                            {
+                                "command": "git.init",
+                                "when": "config.git.enabled && !git.missing"
+                            },
+                            {
+                                "command": "git.openRepository",
+                                "when": "config.git.enabled && !git.missing"
+                            }
+                        ]
+                    }
                 }
             }
         }
