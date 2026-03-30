@@ -14,11 +14,11 @@ import { CancellationToken } from './cancellation';
  * can be subscribed. The event is the subscriber function itself.
  */
 export interface Event<T> {
-	(listener: (e: T) => any, thisArgs?: any, disposables?: IDisposable[] | DisposableStore): IDisposable;
+	(listener: (e: T) => any, thisArgs?: unknown, disposables?: IDisposable[] | DisposableStore): IDisposable;
 }
 
 export namespace Event {
-	export const None: Event<any> = () => Disposable.None;
+	export const None: Event<unknown> = () => Disposable.None;
 
 	/**
 	 * Given an event, returns another event which only fires once.
@@ -78,7 +78,7 @@ export namespace Event {
 	 * Given an event, returns the same event but typed as `Event<void>`.
 	 */
 	export function signal<T>(event: Event<T>): Event<void> {
-		return event as Event<any> as Event<void>;
+		return event as Event<unknown> as Event<void>;
 	}
 
 	/**
@@ -86,7 +86,7 @@ export namespace Event {
 	 * whenever any of the provided events emit.
 	 */
 	export function any<T>(...events: Event<T>[]): Event<T>;
-	export function any(...events: Event<any>[]): Event<void>;
+	export function any(...events: Event<unknown>[]): Event<void>;
 	export function any<T>(...events: Event<T>[]): Event<T> {
 		return (listener, thisArgs = null, disposables?) => combinedDisposable(...events.map(event => event(e => listener.call(thisArgs, e), null, disposables)));
 	}
@@ -138,7 +138,7 @@ export namespace Event {
 
 		let subscription: IDisposable;
 		let output: O | undefined = undefined;
-		let handle: any = undefined;
+		let handle: unknown = undefined;
 		let numDebouncedCalls = 0;
 
 		const emitter = new Emitter<O>({
@@ -278,8 +278,8 @@ export namespace Event {
 		latch(): IChainableEvent<T>;
 		debounce(merge: (last: T | undefined, event: T) => T, delay?: number, leading?: boolean, leakWarningThreshold?: number): IChainableEvent<T>;
 		debounce<R>(merge: (last: R | undefined, event: T) => R, delay?: number, leading?: boolean, leakWarningThreshold?: number): IChainableEvent<R>;
-		on(listener: (e: T) => any, thisArgs?: any, disposables?: IDisposable[] | DisposableStore): IDisposable;
-		once(listener: (e: T) => any, thisArgs?: any, disposables?: IDisposable[]): IDisposable;
+		on(listener: (e: T) => any, thisArgs?: unknown, disposables?: IDisposable[] | DisposableStore): IDisposable;
+		once(listener: (e: T) => any, thisArgs?: unknown, disposables?: IDisposable[]): IDisposable;
 	}
 
 	class ChainableEvent<T> implements IChainableEvent<T> {
@@ -314,11 +314,11 @@ export namespace Event {
 			return new ChainableEvent(debounce(this.event, merge, delay, leading, leakWarningThreshold));
 		}
 
-		on(listener: (e: T) => any, thisArgs: any, disposables: IDisposable[] | DisposableStore) {
+		on(listener: (e: T) => any, thisArgs: unknown, disposables: IDisposable[] | DisposableStore) {
 			return this.event(listener, thisArgs, disposables);
 		}
 
-		once(listener: (e: T) => any, thisArgs: any, disposables: IDisposable[]) {
+		once(listener: (e: T) => any, thisArgs: unknown, disposables: IDisposable[]) {
 			return once(this.event)(listener, thisArgs, disposables);
 		}
 	}
@@ -332,8 +332,8 @@ export namespace Event {
 		removeListener(event: string | symbol, listener: Function): unknown;
 	}
 
-	export function fromNodeEventEmitter<T>(emitter: NodeEventEmitter, eventName: string, map: (...args: any[]) => T = id => id): Event<T> {
-		const fn = (...args: any[]) => result.fire(map(...args));
+	export function fromNodeEventEmitter<T>(emitter: NodeEventEmitter, eventName: string, map: (...args: unknown[]) => T = id => id): Event<T> {
+		const fn = (...args: unknown[]) => result.fire(map(...args));
 		const onFirstListenerAdd = () => emitter.on(eventName, fn);
 		const onLastListenerRemove = () => emitter.removeListener(eventName, fn);
 		const result = new Emitter<T>({ onFirstListenerAdd, onLastListenerRemove });
@@ -346,8 +346,8 @@ export namespace Event {
 		removeEventListener(event: string | symbol, listener: Function): void;
 	}
 
-	export function fromDOMEventEmitter<T>(emitter: DOMEventEmitter, eventName: string, map: (...args: any[]) => T = id => id): Event<T> {
-		const fn = (...args: any[]) => result.fire(map(...args));
+	export function fromDOMEventEmitter<T>(emitter: DOMEventEmitter, eventName: string, map: (...args: unknown[]) => T = id => id): Event<T> {
+		const fn = (...args: unknown[]) => result.fire(map(...args));
 		const onFirstListenerAdd = () => emitter.addEventListener(eventName, fn);
 		const onLastListenerRemove = () => emitter.removeEventListener(eventName, fn);
 		const result = new Emitter<T>({ onFirstListenerAdd, onLastListenerRemove });
@@ -505,7 +505,7 @@ export class Emitter<T> {
 	 */
 	get event(): Event<T> {
 		if (!this._event) {
-			this._event = (listener: (e: T) => any, thisArgs?: any, disposables?: IDisposable[] | DisposableStore) => {
+			this._event = (listener: (e: T) => any, thisArgs?: unknown, disposables?: IDisposable[] | DisposableStore) => {
 				if (!this._listeners) {
 					this._listeners = new LinkedList();
 				}
@@ -655,14 +655,14 @@ export class PauseableEmitter<T> extends Emitter<T> {
 }
 
 export interface IWaitUntil {
-	waitUntil(thenable: Promise<any>): void;
+	waitUntil(thenable: Promise<unknown>): void;
 }
 
 export class AsyncEmitter<T extends IWaitUntil> extends Emitter<T> {
 
 	private _asyncDeliveryQueue?: LinkedList<[Listener<T>, Omit<T, 'waitUntil'>]>;
 
-	async fireAsync(data: Omit<T, 'waitUntil'>, token: CancellationToken, promiseJoin?: (p: Promise<any>, listener: Function) => Promise<any>): Promise<void> {
+	async fireAsync(data: Omit<T, 'waitUntil'>, token: CancellationToken, promiseJoin?: (p: Promise<unknown>, listener: Function) => Promise<unknown>): Promise<void> {
 		if (!this._listeners) {
 			return;
 		}
@@ -678,11 +678,11 @@ export class AsyncEmitter<T extends IWaitUntil> extends Emitter<T> {
 		while (this._asyncDeliveryQueue.size > 0 && !token.isCancellationRequested) {
 
 			const [listener, data] = this._asyncDeliveryQueue.shift()!;
-			const thenables: Promise<any>[] = [];
+			const thenables: Promise<unknown>[] = [];
 
 			const event = <T>{
 				...data,
-				waitUntil: (p: Promise<any>): void => {
+				waitUntil: (p: Promise<unknown>): void => {
 					if (Object.isFrozen(thenables)) {
 						throw new Error('waitUntil can NOT be called asynchronous');
 					}

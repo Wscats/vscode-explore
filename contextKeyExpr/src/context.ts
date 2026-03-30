@@ -7,24 +7,24 @@ import { IContext } from './contextkey';
 
 export class Context implements IContext {
     private readonly _values = new Map<string, any>();
-    getValue(key: string): any {
+    getValue(key: string): unknown {
         if (this._values.has(key)) {
             return this._values.get(key);
         }
     }
-    setValue(key: string, value: any) {
+    setValue(key: string, value: unknown) {
         this._values.set(key, value);
     }
 }
 
 export class Contexts implements IContext {
     private readonly _values = new Map<string, any>();
-    getValue(key: string): any {
+    getValue(key: string): unknown {
         if (this._values.has(key)) {
             return this._values.get(key);
         }
     }
-    setValue(key: string, value: any) {
+    setValue(key: string, value: unknown) {
         this._values.set(key, value);
     }
 }

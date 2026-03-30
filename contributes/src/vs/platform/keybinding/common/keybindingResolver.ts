@@ -12,7 +12,7 @@ export interface IResolveResult {
 	/** Whether the resolved keybinding is leaving (and executing) a chord */
 	leaveChord: boolean;
 	commandId: string | null;
-	commandArgs: any;
+	commandArgs: unknown;
 	bubble: boolean;
 }
 

@@ -17,7 +17,7 @@ export namespace schema {
         alt?: string;
         when?: ContextKeyExpression;
         group?: string;
-        component?: any;
+        component?: unknown;
     }
 
     export type IUserFriendlyIcon = string | { light: string; dark: string; };
@@ -28,7 +28,7 @@ export namespace schema {
         alt?: string;
         when?: string;
         group?: string;
-        component?: any;
+        component?: unknown;
     }
 
     export function isValidCommand(command: IUserFriendlyCommand, collector: ExtensionMessageCollector): boolean {

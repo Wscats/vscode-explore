@@ -316,14 +316,14 @@ export function coalesceInPlace<T>(array: Array<T | undefined | null>): void {
 /**
  * Moves the element in the array for the provided positions.
  */
-export function move(array: any[], from: number, to: number): void {
+export function move(array: unknown[], from: number, to: number): void {
 	array.splice(to, 0, array.splice(from, 1)[0]);
 }
 
 /**
  * @returns false if the provided object is an array and not empty.
  */
-export function isFalsyOrEmpty(obj: any): boolean {
+export function isFalsyOrEmpty(obj: unknown): boolean {
 	return !Array.isArray(obj) || obj.length === 0;
 }
 

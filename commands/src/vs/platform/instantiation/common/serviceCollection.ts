@@ -8,9 +8,9 @@ import { SyncDescriptor } from './descriptors';
 
 export class ServiceCollection {
 
-	private _entries = new Map<ServiceIdentifier<any>, any>();
+	private _entries = new Map<ServiceIdentifier<unknown>, any>();
 
-	constructor(...entries: [ServiceIdentifier<any>, any][]) {
+	constructor(...entries: [ServiceIdentifier<unknown>, any][]) {
 		for (let [id, service] of entries) {
 			this.set(id, service);
 		}
@@ -22,7 +22,7 @@ export class ServiceCollection {
 		return result;
 	}
 
-	has(id: ServiceIdentifier<any>): boolean {
+	has(id: ServiceIdentifier<unknown>): boolean {
 		return this._entries.has(id);
 	}
 

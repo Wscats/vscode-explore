@@ -14,11 +14,11 @@ export class ResolvedKeybindingItem {
 	public readonly keypressParts: string[];
 	public readonly bubble: boolean;
 	public readonly command: string | null;
-	public readonly commandArgs: any;
+	public readonly commandArgs: unknown;
 	public readonly when: ContextKeyExpression | undefined;
 	public readonly isDefault: boolean;
 
-	constructor(resolvedKeybinding: ResolvedKeybinding | undefined, command: string | null, commandArgs: any, when: ContextKeyExpression | undefined, isDefault: boolean) {
+	constructor(resolvedKeybinding: ResolvedKeybinding | undefined, command: string | null, commandArgs: unknown, when: ContextKeyExpression | undefined, isDefault: boolean) {
 		this.resolvedKeybinding = resolvedKeybinding;
 		this.keypressParts = resolvedKeybinding ? removeElementsAfterNulls(resolvedKeybinding.getDispatchParts()) : [];
 		this.bubble = (command ? command.charCodeAt(0) === CharCode.Caret : false);

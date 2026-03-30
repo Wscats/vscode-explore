@@ -33,7 +33,7 @@ Contributes.setContribute({
 });
 
 function renderToolbar() {
-    Contributes.getContribute('toolbar')?.map((toolbar: any) => {
+    Contributes.getContribute('toolbar')?.map((toolbar: unknown) => {
         if (toolbar.when) {
             const li = document.createElement('li');
             li.innerHTML = toolbar.component;
@@ -43,7 +43,7 @@ function renderToolbar() {
 }
 
 function renderSheetbar() {
-    Contributes.getContribute('sheetbar')?.map((toolbar: any) => {
+    Contributes.getContribute('sheetbar')?.map((toolbar: unknown) => {
         if (toolbar.when) {
             const li = document.createElement('li');
             li.innerHTML = toolbar.component;

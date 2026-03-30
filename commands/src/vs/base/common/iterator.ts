@@ -5,11 +5,11 @@
 
 export namespace Iterable {
 
-	export function is<T = any>(thing: any): thing is IterableIterator<T> {
+	export function is<T = any>(thing: unknown): thing is IterableIterator<T> {
 		return thing && typeof thing === 'object' && typeof thing[Symbol.iterator] === 'function';
 	}
 
-	const _empty: Iterable<any> = Object.freeze([]);
+	const _empty: Iterable<unknown> = Object.freeze([]);
 	export function empty<T = any>(): Iterable<T> {
 		return _empty;
 	}

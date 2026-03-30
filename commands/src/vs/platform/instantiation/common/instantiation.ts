@@ -10,12 +10,12 @@ import * as descriptors from './descriptors';
 
 export namespace _util {
 
-	export const serviceIds = new Map<string, ServiceIdentifier<any>>();
+	export const serviceIds = new Map<string, ServiceIdentifier<unknown>>();
 
 	export const DI_TARGET = '$di$target';
 	export const DI_DEPENDENCIES = '$di$dependencies';
 
-	export function getServiceDependencies(ctor: any): { id: ServiceIdentifier<any>, index: number, optional: boolean }[] {
+	export function getServiceDependencies(ctor: unknown): { id: ServiceIdentifier<unknown>, index: number, optional: boolean }[] {
 		return ctor[DI_DEPENDENCIES] || [];
 	}
 }
@@ -101,7 +101,7 @@ export interface IInstantiationService {
 	createInstance<A1, A2, A3, A4, A5, A6, A7, T>(descriptor: descriptors.SyncDescriptor7<A1, A2, A3, A4, A5, A6, A7, T>, a1: A1, a2: A2, a3: A3, a4: A4, a5: A5, a6: A6, a7: A7): T;
 	createInstance<A1, A2, A3, A4, A5, A6, A7, A8, T>(descriptor: descriptors.SyncDescriptor8<A1, A2, A3, A4, A5, A6, A7, A8, T>, a1: A1, a2: A2, a3: A3, a4: A4, a5: A5, a6: A6, a7: A7, a8: A8): T;
 
-	createInstance<Ctor extends new (...args: any[]) => any, R extends InstanceType<Ctor>>(t: Ctor, ...args: GetLeadingNonServiceArgs<ConstructorParameters<Ctor>>): R;
+	createInstance<Ctor extends new (...args: unknown[]) => any, R extends InstanceType<Ctor>>(t: Ctor, ...args: GetLeadingNonServiceArgs<ConstructorParameters<Ctor>>): R;
 
 	/**
 	 *
@@ -120,7 +120,7 @@ export interface IInstantiationService {
  * Identifies a service of type T
  */
 export interface ServiceIdentifier<T> {
-	(...args: any[]): void;
+	(...args: unknown[]): void;
 	type: T;
 }
 
@@ -142,7 +142,7 @@ export function createDecorator<T>(serviceId: string): ServiceIdentifier<T> {
 		return _util.serviceIds.get(serviceId)!;
 	}
 
-	const id = <any>function (target: Function, key: string, index: number): any {
+	const id = <unknown>function (target: Function, key: string, index: number): unknown {
 		if (arguments.length !== 3) {
 			throw new Error('@IServiceName-decorator can only be used to decorate a parameter');
 		}

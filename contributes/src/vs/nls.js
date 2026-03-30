@@ -3,16 +3,16 @@
  * @author enoyao
  */
 'use strict';
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+const __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (const s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (const r = Array(s), k = 0, i = 0; i < il; i++)
+        for (const a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
             r[k] = a[j];
     return r;
 };
 var NLSLoaderPlugin;
 (function (NLSLoaderPlugin) {
-    var Environment = /** @class */ (function () {
+    const Environment = /** @class */ (function () {
         function Environment() {
             this._detected = false;
             this._isPseudo = false;
@@ -41,9 +41,9 @@ var NLSLoaderPlugin;
         }
         else {
             result = message.replace(/\{(\d+)\}/g, function (match, rest) {
-                var index = rest[0];
-                var arg = args[index];
-                var result = match;
+                const index = rest[0];
+                const arg = args[index];
+                let result = match;
                 if (typeof arg === 'string') {
                     result = arg;
                 }
@@ -60,7 +60,7 @@ var NLSLoaderPlugin;
         return result;
     }
     function findLanguageForModule(config, name) {
-        var result = config[name];
+        let result = config[name];
         if (result)
             return result;
         result = config['*'];
@@ -69,25 +69,25 @@ var NLSLoaderPlugin;
         return null;
     }
     function localize(env, data, message) {
-        var args = [];
-        for (var _i = 3; _i < arguments.length; _i++) {
+        let args = [];
+        for (let _i = 3; _i < arguments.length; _i++) {
             args[_i - 3] = arguments[_i];
         }
         return _format(message, args, env);
     }
     function createScopedLocalize(scope, env) {
         return function (idx, defaultValue) {
-            var restArgs = Array.prototype.slice.call(arguments, 2);
+            const restArgs = Array.prototype.slice.call(arguments, 2);
             return _format(scope[idx], restArgs, env);
         };
     }
-    var NLSPlugin = /** @class */ (function () {
+    let NLSPlugin = /** @class */ (function () {
         function NLSPlugin(env) {
-            var _this = this;
+            let _this = this;
             this._env = env;
             this.localize = function (data, message) {
-                var args = [];
-                for (var _i = 2; _i < arguments.length; _i++) {
+                const args = [];
+                for (let _i = 2; _i < arguments.length; _i++) {
                     args[_i - 2] = arguments[_i];
                 }
                 return localize.apply(void 0, __spreadArrays([_this._env, data, message], args));
@@ -102,7 +102,7 @@ var NLSLoaderPlugin;
             };
         };
         NLSPlugin.prototype.load = function (name, req, load, config) {
-            var _this = this;
+            const _this = this;
             config = config || {};
             if (!name || name.length === 0) {
                 load({
@@ -110,13 +110,13 @@ var NLSLoaderPlugin;
                 });
             }
             else {
-                var pluginConfig = config['vs/nls'] || {};
-                var language = pluginConfig.availableLanguages ? findLanguageForModule(pluginConfig.availableLanguages, name) : null;
-                var suffix = '.nls';
+                const pluginConfig = config['vs/nls'] || {};
+                const language = pluginConfig.availableLanguages ? findLanguageForModule(pluginConfig.availableLanguages, name) : null;
+                let suffix = '.nls';
                 if (language !== null && language !== NLSPlugin.DEFAULT_TAG) {
                     suffix = suffix + '.' + language;
                 }
-                var messagesLoaded_1 = function (messages) {
+                const messagesLoaded_1 = function (messages) {
                     if (Array.isArray(messages)) {
                         messages.localize = createScopedLocalize(messages, _this._env);
                     }

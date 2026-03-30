@@ -20,7 +20,7 @@ export interface ICommand {
 export interface IConfigurationProperty {
 	description: string;
 	type: string | string[];
-	default?: any;
+	default?: unknown;
 }
 
 export interface IConfiguration {
@@ -129,7 +129,7 @@ export interface IExtensionContributions {
 
 export type ExtensionKind = 'ui' | 'workspace' | 'web';
 
-export function isIExtensionIdentifier(thing: any): thing is IExtensionIdentifier {
+export function isIExtensionIdentifier(thing: unknown): thing is IExtensionIdentifier {
 	return thing
 		&& typeof thing === 'object'
 		&& typeof thing.id === 'string'

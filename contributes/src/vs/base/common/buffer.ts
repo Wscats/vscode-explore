@@ -5,7 +5,7 @@
 
 import * as strings from './strings';
 
-declare const Buffer: any;
+declare const Buffer: unknown;
 
 const hasBuffer = (typeof Buffer !== 'undefined');
 const hasTextEncoder = (typeof TextEncoder !== 'undefined');

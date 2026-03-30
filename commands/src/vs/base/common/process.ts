@@ -25,7 +25,7 @@ else {
 
 		// Supported
 		get platform(): 'win32' | 'linux' | 'darwin' { return isWindows ? 'win32' : isMacintosh ? 'darwin' : 'linux'; },
-		nextTick(callback: (...args: any[]) => void): void { return setImmediate(callback); },
+		nextTick(callback: (...args: unknown[]) => void): void { return setImmediate(callback); },
 
 		// Unsupported
 		get env() { return Object.create(null); },

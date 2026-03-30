@@ -11,7 +11,7 @@ export interface IJSONSchema {
 	$schema?: string;
 	type?: JSONSchemaType | JSONSchemaType[];
 	title?: string;
-	default?: any;
+	default?: unknown;
 	definitions?: IJSONSchemaMap;
 	description?: string;
 	properties?: IJSONSchemaMap;
@@ -39,11 +39,11 @@ export interface IJSONSchema {
 	allOf?: IJSONSchema[];
 	oneOf?: IJSONSchema[];
 	not?: IJSONSchema;
-	enum?: any[];
+	enum?: unknown[];
 	format?: string;
 
 	// schema draft 06
-	const?: any;
+	const?: unknown;
 	contains?: IJSONSchema;
 	propertyNames?: IJSONSchema;
 
@@ -75,6 +75,6 @@ export interface IJSONSchemaMap {
 export interface IJSONSchemaSnippet {
 	label?: string;
 	description?: string;
-	body?: any; // a object that will be JSON stringified
+	body?: unknown; // a object that will be JSON stringified
 	bodyText?: string; // an already stringified JSON object that can contain new lines (\n) and tabs (\t)
 }

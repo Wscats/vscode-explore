@@ -5,7 +5,7 @@
 
 class Node<E> {
 
-	static readonly Undefined = new Node<any>(undefined);
+	static readonly Undefined = new Node<unknown>(undefined);
 
 	element: E;
 	next: Node<E>;

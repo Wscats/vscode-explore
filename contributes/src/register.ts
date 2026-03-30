@@ -17,7 +17,7 @@ ExtensionsRegistry.registerExtensionPoint<schema.IUserFriendlyCommand | schema.I
     jsonSchema: schema.toolbarsContribution
 }).setHandler((extensions: readonly IExtensionPointUser<schema.IUserFriendlyCommand | schema.IUserFriendlyCommand[]>[]) => {
     console.log('-----------ToolbarsContribution------------');
-    function handleCommand(userFriendlyCommand: schema.IUserFriendlyCommand, extension: IExtensionPointUser<any>, bucket: schema.IToolbarRegistrations[]) {
+    function handleCommand(userFriendlyCommand: schema.IUserFriendlyCommand, extension: IExtensionPointUser<unknown>, bucket: schema.IToolbarRegistrations[]) {
         if (!schema.isValidCommand(userFriendlyCommand, extension.collector)) {
             return;
         }

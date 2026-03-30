@@ -55,7 +55,7 @@ export default new class Contributes {
         contextOptions
     }: {
         name: string,
-        json: any,
+        json: unknown,
         contextOptions: IContextOptions
     }) {
         // 获取 JSON 文件中的配置参数
@@ -68,7 +68,7 @@ export default new class Contributes {
     }
 
     // 深度遍历配置项树
-    private _iterateContribute(obj: any, context: Context) {
+    private _iterateContribute(obj: unknown, context: Context) {
         for (let key in obj) {
             // 排除掉原型继承而来的属性
             if (!obj.hasOwnProperty(key)) return;
@@ -76,7 +76,7 @@ export default new class Contributes {
             if (key === 'when') {
                 obj[key] = contextMatchesRules(context, ContextKeyExpr.deserialize(obj[key]));
             }
-            if (typeof obj[key] == 'object' || typeof obj[key] == 'function') {
+            if (typeof obj[key] === 'object' || typeof obj[key] === 'function') {
                 // 递归遍历属性值的子属性
                 this._iterateContribute(obj[key], context);
             }

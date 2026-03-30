@@ -216,7 +216,7 @@ export const schema: IJSONSchema = {
             type: 'object',
             properties: {
                 // extensions will fill in
-            } as { [key: string]: any },
+            } as { [key: string]: unknown },
             default: {}
         },
         preview: {
@@ -416,14 +416,14 @@ export const schema: IJSONSchema = {
 
 export interface IExtensionPointDescriptor {
     extensionPoint: string;
-    deps?: IExtensionPoint<any>[];
+    deps?: IExtensionPoint<unknown>[];
     jsonSchema: IJSONSchema;
     defaultExtensionKind?: ExtensionKind;
 }
 
 export class ExtensionsRegistryImpl {
 
-    private readonly _extensionPoints = new Map<string, ExtensionPoint<any>>();
+    private readonly _extensionPoints = new Map<string, ExtensionPoint<unknown>>();
 
     public registerExtensionPoint<T>(desc: IExtensionPointDescriptor): IExtensionPoint<T> {
         if (this._extensionPoints.has(desc.extensionPoint)) {
@@ -438,7 +438,7 @@ export class ExtensionsRegistryImpl {
         return result;
     }
 
-    public getExtensionPoints(): ExtensionPoint<any>[] {
+    public getExtensionPoints(): ExtensionPoint<unknown>[] {
         return values(this._extensionPoints);
     }
 }

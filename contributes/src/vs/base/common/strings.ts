@@ -35,7 +35,7 @@ const _formatRegexp = /{(\d+)}/g;
  * @param value string to which formatting is applied
  * @param args replacements for {n}-entries
  */
-export function format(value: string, ...args: any[]): string {
+export function format(value: string, ...args: unknown[]): string {
 	if (args.length === 0) {
 		return value;
 	}

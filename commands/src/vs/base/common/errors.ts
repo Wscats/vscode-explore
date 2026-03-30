@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 export interface ErrorListenerCallback {
-	(error: any): void;
+	(error: unknown): void;
 }
 
 export interface ErrorListenerUnbind {
@@ -13,14 +13,14 @@ export interface ErrorListenerUnbind {
 
 // Avoid circular dependency on EventEmitter by implementing a subset of the interface.
 export class ErrorHandler {
-	private unexpectedErrorHandler: (e: any) => void;
+	private unexpectedErrorHandler: (e: unknown) => void;
 	private listeners: ErrorListenerCallback[];
 
 	constructor() {
 
 		this.listeners = [];
 
-		this.unexpectedErrorHandler = function (e: any) {
+		this.unexpectedErrorHandler = function (e: unknown) {
 			setTimeout(() => {
 				if (e.stack) {
 					throw new Error(e.message + '\n\n' + e.stack);
@@ -39,7 +39,7 @@ export class ErrorHandler {
 		};
 	}
 
-	private emit(e: any): void {
+	private emit(e: unknown): void {
 		this.listeners.forEach((listener) => {
 			listener(e);
 		});
@@ -49,32 +49,32 @@ export class ErrorHandler {
 		this.listeners.splice(this.listeners.indexOf(listener), 1);
 	}
 
-	setUnexpectedErrorHandler(newUnexpectedErrorHandler: (e: any) => void): void {
+	setUnexpectedErrorHandler(newUnexpectedErrorHandler: (e: unknown) => void): void {
 		this.unexpectedErrorHandler = newUnexpectedErrorHandler;
 	}
 
-	getUnexpectedErrorHandler(): (e: any) => void {
+	getUnexpectedErrorHandler(): (e: unknown) => void {
 		return this.unexpectedErrorHandler;
 	}
 
-	onUnexpectedError(e: any): void {
+	onUnexpectedError(e: unknown): void {
 		this.unexpectedErrorHandler(e);
 		this.emit(e);
 	}
 
 	// For external errors, we don't want the listeners to be called
-	onUnexpectedExternalError(e: any): void {
+	onUnexpectedExternalError(e: unknown): void {
 		this.unexpectedErrorHandler(e);
 	}
 }
 
 export const errorHandler = new ErrorHandler();
 
-export function setUnexpectedErrorHandler(newUnexpectedErrorHandler: (e: any) => void): void {
+export function setUnexpectedErrorHandler(newUnexpectedErrorHandler: (e: unknown) => void): void {
 	errorHandler.setUnexpectedErrorHandler(newUnexpectedErrorHandler);
 }
 
-export function onUnexpectedError(e: any): undefined {
+export function onUnexpectedError(e: unknown): undefined {
 	// ignore errors from cancelled promises
 	if (!isPromiseCanceledError(e)) {
 		errorHandler.onUnexpectedError(e);
@@ -82,7 +82,7 @@ export function onUnexpectedError(e: any): undefined {
 	return undefined;
 }
 
-export function onUnexpectedExternalError(e: any): undefined {
+export function onUnexpectedExternalError(e: unknown): undefined {
 	// ignore errors from cancelled promises
 	if (!isPromiseCanceledError(e)) {
 		errorHandler.onUnexpectedExternalError(e);
@@ -98,11 +98,11 @@ export interface SerializedError {
 }
 
 export function transformErrorForSerialization(error: Error): SerializedError;
-export function transformErrorForSerialization(error: any): any;
-export function transformErrorForSerialization(error: any): any {
+export function transformErrorForSerialization(error: unknown): unknown;
+export function transformErrorForSerialization(error: unknown): unknown {
 	if (error instanceof Error) {
 		let { name, message } = error;
-		const stack: string = (<any>error).stacktrace || (<any>error).stack;
+		const stack: string = (<unknown>error).stacktrace || (<unknown>error).stack;
 		return {
 			$isError: true,
 			name,
@@ -117,7 +117,7 @@ export function transformErrorForSerialization(error: any): any {
 
 // see https://github.com/v8/v8/wiki/Stack%20Trace%20API#basic-stack-traces
 export interface V8CallSite {
-	getThis(): any;
+	getThis(): unknown;
 	getTypeName(): string;
 	getFunction(): string;
 	getFunctionName(): string;
@@ -138,7 +138,7 @@ const canceledName = 'Canceled';
 /**
  * Checks if the given error is a promise in canceled state
  */
-export function isPromiseCanceledError(error: any): boolean {
+export function isPromiseCanceledError(error: unknown): boolean {
 	return error instanceof Error && error.name === canceledName && error.message === canceledName;
 }
 
@@ -179,7 +179,7 @@ export function disposed(what: string): Error {
 	return result;
 }
 
-export function getErrorMessage(err: any): string {
+export function getErrorMessage(err: unknown): string {
 	if (!err) {
 		return 'Error';
 	}

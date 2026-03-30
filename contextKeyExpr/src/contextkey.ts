@@ -41,8 +41,8 @@ export const enum ContextKeyExprType {
 export interface IContextKeyExprMapper {
 	mapDefined(key: string): ContextKeyExpression;
 	mapNot(key: string): ContextKeyExpression;
-	mapEquals(key: string, value: any): ContextKeyExpression;
-	mapNotEquals(key: string, value: any): ContextKeyExpression;
+	mapEquals(key: string, value: unknown): ContextKeyExpression;
+	mapNotEquals(key: string, value: unknown): ContextKeyExpression;
 	mapRegex(key: string, regexp: RegExp | null): ContextKeyRegexExpr;
 }
 
@@ -77,11 +77,11 @@ export abstract class ContextKeyExpr {
 		return ContextKeyDefinedExpr.create(key);
 	}
 
-	public static equals(key: string, value: any): ContextKeyExpression {
+	public static equals(key: string, value: unknown): ContextKeyExpression {
 		return ContextKeyEqualsExpr.create(key, value);
 	}
 
-	public static notEquals(key: string, value: any): ContextKeyExpression {
+	public static notEquals(key: string, value: unknown): ContextKeyExpression {
 		return ContextKeyNotEqualsExpr.create(key, value);
 	}
 
@@ -101,19 +101,19 @@ export abstract class ContextKeyExpr {
 		return ContextKeyOrExpr.create(expr);
 	}
 
-	public static greaterOrEquals(key: string, value: any): ContextKeyExpression {
+	public static greaterOrEquals(key: string, value: unknown): ContextKeyExpression {
 		return ContextKeyGreaterOrEqualsExpr.create(key, value);
 	}
 
-	public static lessOrEquals(key: string, value: any): ContextKeyExpression {
+	public static lessOrEquals(key: string, value: unknown): ContextKeyExpression {
 		return ContextKeyLessOrEqualsExpr.create(key, value);
 	}
 
-	public static greater(key: string, value: any): ContextKeyExpression {
+	public static greater(key: string, value: unknown): ContextKeyExpression {
 		return ContextKeyGreaterExpr.create(key, value);
 	}
 
-	public static less(key: string, value: any): ContextKeyExpression {
+	public static less(key: string, value: unknown): ContextKeyExpression {
 		return ContextKeyLessExpr.create(key, value);
 	}
 
@@ -138,13 +138,13 @@ export abstract class ContextKeyExpr {
 	private static _deserializeOne(serializedOne: string, strict: boolean): ContextKeyExpression {
 		serializedOne = serializedOne.trim();
 
-		if (serializedOne.indexOf('!=') >= 0) {
-			let pieces = serializedOne.split('!=');
+		if (serializedOne.indexOf('!==') >= 0) {
+			let pieces = serializedOne.split('!==');
 			return ContextKeyNotEqualsExpr.create(pieces[0].trim(), this._deserializeValue(pieces[1], strict));
 		}
 
-		if (serializedOne.indexOf('==') >= 0) {
-			let pieces = serializedOne.split('==');
+		if (serializedOne.indexOf('===') >= 0) {
+			let pieces = serializedOne.split('===');
 			return ContextKeyEqualsExpr.create(pieces[0].trim(), this._deserializeValue(pieces[1], strict));
 		}
 
@@ -182,7 +182,7 @@ export abstract class ContextKeyExpr {
 		return ContextKeyDefinedExpr.create(serializedOne);
 	}
 
-	private static _deserializeValue(serializedValue: string, strict: boolean): any {
+	private static _deserializeValue(serializedValue: string, strict: boolean): unknown {
 		serializedValue = serializedValue.trim();
 
 		if (serializedValue === 'true') {
@@ -373,7 +373,7 @@ export class ContextKeyDefinedExpr implements IContextKeyExpression {
 
 export class ContextKeyEqualsExpr implements IContextKeyExpression {
 
-	public static create(key: string, value: any): ContextKeyExpression {
+	public static create(key: string, value: unknown): ContextKeyExpression {
 		if (typeof value === 'boolean') {
 			return (value ? ContextKeyDefinedExpr.create(key) : ContextKeyNotExpr.create(key));
 		}
@@ -387,7 +387,7 @@ export class ContextKeyEqualsExpr implements IContextKeyExpression {
 
 	public readonly type = ContextKeyExprType.Equals;
 
-	private constructor(private readonly key: string, private readonly value: any) {
+	private constructor(private readonly key: string, private readonly value: unknown) {
 	}
 
 	public cmp(other: ContextKeyExpression): number {
@@ -417,13 +417,13 @@ export class ContextKeyEqualsExpr implements IContextKeyExpression {
 	}
 
 	public evaluate(context: IContext): boolean {
-		// Intentional ==
+		// Intentional ===
 		// eslint-disable-next-line eqeqeq
-		return (context.getValue(this.key) == this.value);
+		return (context.getValue(this.key) === this.value);
 	}
 
 	public serialize(): string {
-		return this.key + ' == \'' + this.value + '\'';
+		return this.key + ' === \'' + this.value + '\'';
 	}
 
 	public keys(): string[] {
@@ -441,7 +441,7 @@ export class ContextKeyEqualsExpr implements IContextKeyExpression {
 
 export class ContextKeyNotEqualsExpr implements IContextKeyExpression {
 
-	public static create(key: string, value: any): ContextKeyExpression {
+	public static create(key: string, value: unknown): ContextKeyExpression {
 		if (typeof value === 'boolean') {
 			if (value) {
 				return ContextKeyNotExpr.create(key);
@@ -458,7 +458,7 @@ export class ContextKeyNotEqualsExpr implements IContextKeyExpression {
 
 	public readonly type = ContextKeyExprType.NotEquals;
 
-	private constructor(private readonly key: string, private readonly value: any) {
+	private constructor(private readonly key: string, private readonly value: unknown) {
 	}
 
 	public cmp(other: ContextKeyExpression): number {
@@ -488,13 +488,13 @@ export class ContextKeyNotEqualsExpr implements IContextKeyExpression {
 	}
 
 	public evaluate(context: IContext): boolean {
-		// Intentional !=
+		// Intentional !==
 		// eslint-disable-next-line eqeqeq
-		return (context.getValue(this.key) != this.value);
+		return (context.getValue(this.key) !== this.value);
 	}
 
 	public serialize(): string {
-		return this.key + ' != \'' + this.value + '\'';
+		return this.key + ' !== \'' + this.value + '\'';
 	}
 
 	public keys(): string[] {
@@ -512,7 +512,7 @@ export class ContextKeyNotEqualsExpr implements IContextKeyExpression {
 
 export class ContextKeyGreaterOrEqualsExpr implements IContextKeyExpression {
 
-	public static create(key: string, value: any): ContextKeyExpression {
+	public static create(key: string, value: unknown): ContextKeyExpression {
 		if (typeof value === 'boolean') {
 			return (value ? ContextKeyDefinedExpr.create(key) : ContextKeyNotExpr.create(key));
 		}
@@ -526,7 +526,7 @@ export class ContextKeyGreaterOrEqualsExpr implements IContextKeyExpression {
 
 	public readonly type = ContextKeyExprType.GreaterOrEquals;
 
-	private constructor(private readonly key: string, private readonly value: any) {
+	private constructor(private readonly key: string, private readonly value: unknown) {
 	}
 
 	public cmp(other: ContextKeyExpression): number {
@@ -556,13 +556,13 @@ export class ContextKeyGreaterOrEqualsExpr implements IContextKeyExpression {
 	}
 
 	public evaluate(context: IContext): boolean {
-		// Intentional ==
+		// Intentional ===
 		// eslint-disable-next-line eqeqeq
 		return (Number(context.getValue(this.key)) >= this.value);
 	}
 
 	public serialize(): string {
-		return this.key + ' == \'' + this.value + '\'';
+		return this.key + ' === \'' + this.value + '\'';
 	}
 
 	public keys(): string[] {
@@ -580,7 +580,7 @@ export class ContextKeyGreaterOrEqualsExpr implements IContextKeyExpression {
 
 export class ContextKeyGreaterExpr implements IContextKeyExpression {
 
-	public static create(key: string, value: any): ContextKeyExpression {
+	public static create(key: string, value: unknown): ContextKeyExpression {
 		if (typeof value === 'boolean') {
 			return (value ? ContextKeyDefinedExpr.create(key) : ContextKeyNotExpr.create(key));
 		}
@@ -594,7 +594,7 @@ export class ContextKeyGreaterExpr implements IContextKeyExpression {
 
 	public readonly type = ContextKeyExprType.Greater;
 
-	private constructor(private readonly key: string, private readonly value: any) {
+	private constructor(private readonly key: string, private readonly value: unknown) {
 	}
 
 	public cmp(other: ContextKeyExpression): number {
@@ -624,13 +624,13 @@ export class ContextKeyGreaterExpr implements IContextKeyExpression {
 	}
 
 	public evaluate(context: IContext): boolean {
-		// Intentional ==
+		// Intentional ===
 		// eslint-disable-next-line eqeqeq
 		return (Number(context.getValue(this.key)) > this.value);
 	}
 
 	public serialize(): string {
-		return this.key + ' == \'' + this.value + '\'';
+		return this.key + ' === \'' + this.value + '\'';
 	}
 
 	public keys(): string[] {
@@ -648,7 +648,7 @@ export class ContextKeyGreaterExpr implements IContextKeyExpression {
 
 export class ContextKeyLessExpr implements IContextKeyExpression {
 
-	public static create(key: string, value: any): ContextKeyExpression {
+	public static create(key: string, value: unknown): ContextKeyExpression {
 		if (typeof value === 'boolean') {
 			return (value ? ContextKeyDefinedExpr.create(key) : ContextKeyNotExpr.create(key));
 		}
@@ -662,7 +662,7 @@ export class ContextKeyLessExpr implements IContextKeyExpression {
 
 	public readonly type = ContextKeyExprType.Less;
 
-	private constructor(private readonly key: string, private readonly value: any) {
+	private constructor(private readonly key: string, private readonly value: unknown) {
 	}
 
 	public cmp(other: ContextKeyExpression): number {
@@ -692,13 +692,13 @@ export class ContextKeyLessExpr implements IContextKeyExpression {
 	}
 
 	public evaluate(context: IContext): boolean {
-		// Intentional ==
+		// Intentional ===
 		// eslint-disable-next-line eqeqeq
 		return (Number(context.getValue(this.key)) < this.value);
 	}
 
 	public serialize(): string {
-		return this.key + ' == \'' + this.value + '\'';
+		return this.key + ' === \'' + this.value + '\'';
 	}
 
 	public keys(): string[] {
@@ -716,7 +716,7 @@ export class ContextKeyLessExpr implements IContextKeyExpression {
 
 export class ContextKeyLessOrEqualsExpr implements IContextKeyExpression {
 
-	public static create(key: string, value: any): ContextKeyExpression {
+	public static create(key: string, value: unknown): ContextKeyExpression {
 		if (typeof value === 'boolean') {
 			return (value ? ContextKeyDefinedExpr.create(key) : ContextKeyNotExpr.create(key));
 		}
@@ -730,7 +730,7 @@ export class ContextKeyLessOrEqualsExpr implements IContextKeyExpression {
 
 	public readonly type = ContextKeyExprType.LessOrEquals;
 
-	private constructor(private readonly key: string, private readonly value: any) {
+	private constructor(private readonly key: string, private readonly value: unknown) {
 	}
 
 	public cmp(other: ContextKeyExpression): number {
@@ -760,13 +760,13 @@ export class ContextKeyLessOrEqualsExpr implements IContextKeyExpression {
 	}
 
 	public evaluate(context: IContext): boolean {
-		// Intentional ==
+		// Intentional ===
 		// eslint-disable-next-line eqeqeq
 		return (Number(context.getValue(this.key)) <= this.value);
 	}
 
 	public serialize(): string {
-		return this.key + ' == \'' + this.value + '\'';
+		return this.key + ' === \'' + this.value + '\'';
 	}
 
 	public keys(): string[] {
@@ -881,7 +881,7 @@ export class ContextKeyRegexExpr implements IContextKeyExpression {
 	}
 
 	public evaluate(context: IContext): boolean {
-		let value = context.getValue<any>(this.key);
+		let value = context.getValue<unknown>(this.key);
 		return this.regexp ? this.regexp.test(value) : false;
 	}
 
@@ -1025,13 +1025,13 @@ export class ContextKeyAndExpr implements IContextKeyExpression {
 			}
 
 			if (e.type === ContextKeyExprType.True) {
-				// anything && true ==> anything
+				// anything && true ===> anything
 				hasTrue = true;
 				continue;
 			}
 
 			if (e.type === ContextKeyExprType.False) {
-				// anything && false ==> false
+				// anything && false ===> false
 				return [ContextKeyFalseExpr.INSTANCE];
 			}
 
@@ -1157,13 +1157,13 @@ export class ContextKeyOrExpr implements IContextKeyExpression {
 				}
 
 				if (e.type === ContextKeyExprType.False) {
-					// anything || false ==> anything
+					// anything || false ===> anything
 					hasFalse = true;
 					continue;
 				}
 
 				if (e.type === ContextKeyExprType.True) {
-					// anything || true ==> true
+					// anything || true ===> true
 					return [ContextKeyTrueExpr.INSTANCE];
 				}
 

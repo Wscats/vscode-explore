@@ -15,20 +15,20 @@ export const ICommandService = createDecorator<ICommandService>('commandService'
 
 export interface ICommandEvent {
 	commandId: string;
-	args: any[];
+	args: unknown[];
 }
 
 export interface ICommandService {
 	readonly _serviceBrand: undefined;
 	onWillExecuteCommand: Event<ICommandEvent>;
 	onDidExecuteCommand: Event<ICommandEvent>;
-	executeCommand<T = any>(commandId: string, ...args: any[]): Promise<T | undefined>;
+	executeCommand<T = any>(commandId: string, ...args: unknown[]): Promise<T | undefined>;
 }
 
 export type ICommandsMap = Map<string, ICommand>;
 
 export interface ICommandHandler {
-	(accessor: ServicesAccessor, ...args: any[]): void;
+	(accessor: ServicesAccessor, ...args: unknown[]): void;
 }
 
 export interface ICommand {
@@ -84,7 +84,7 @@ export const CommandsRegistry: ICommandRegistry = new class implements ICommandR
 				constraints.push(arg.constraint);
 			}
 			const actualHandler = idOrCommand.handler;
-			idOrCommand.handler = function (accessor, ...args: any[]) {
+			idOrCommand.handler = function (accessor, ...args: unknown[]) {
 				validateConstraints(args, constraints);
 				return actualHandler(accessor, ...args);
 			};

@@ -47,7 +47,7 @@ function trackDisposable<T extends IDisposable>(x: T): T {
 
 export class MultiDisposeError extends Error {
 	constructor(
-		public readonly errors: any[]
+		public readonly errors: unknown[]
 	) {
 		super(`Encounter errors while disposing of store. Errors: [${errors.join(', ')}]`);
 	}
@@ -66,9 +66,9 @@ export function dispose<T extends IDisposable>(disposable: T | undefined): T | u
 export function dispose<T extends IDisposable, A extends IterableIterator<T> = IterableIterator<T>>(disposables: IterableIterator<T>): A;
 export function dispose<T extends IDisposable>(disposables: Array<T>): Array<T>;
 export function dispose<T extends IDisposable>(disposables: ReadonlyArray<T>): ReadonlyArray<T>;
-export function dispose<T extends IDisposable>(arg: T | IterableIterator<T> | undefined): any {
+export function dispose<T extends IDisposable>(arg: T | IterableIterator<T> | undefined): unknown {
 	if (Iterable.is(arg)) {
-		let errors: any[] = [];
+		let errors: unknown[] = [];
 
 		for (const d of arg) {
 			if (d) {
@@ -243,7 +243,7 @@ export abstract class ReferenceCollection<T> {
 
 	private readonly references: Map<string, { readonly object: T; counter: number; }> = new Map();
 
-	acquire(key: string, ...args: any[]): IReference<T> {
+	acquire(key: string, ...args: unknown[]): IReference<T> {
 		let reference = this.references.get(key);
 
 		if (!reference) {
@@ -264,7 +264,7 @@ export abstract class ReferenceCollection<T> {
 		return { object, dispose };
 	}
 
-	protected abstract createReferencedObject(key: string, ...args: any[]): T;
+	protected abstract createReferencedObject(key: string, ...args: unknown[]): T;
 	protected abstract destroyReferencedObject(key: string, object: T): void;
 }
 

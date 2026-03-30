@@ -31,7 +31,7 @@ export interface ICommandAction {
 	icon?: Icon;
 	precondition?: ContextKeyExpression;
 	toggled?: ContextKeyExpression | { condition: ContextKeyExpression, icon?: Icon, tooltip?: string | ILocalizedString };
-	component?: any;
+	component?: unknown;
 	when?: ContextKeyExpression;
 }
 
@@ -136,7 +136,7 @@ export class MenuId {
 }
 
 export interface IMenuActionOptions {
-	arg?: any;
+	arg?: unknown;
 	shouldForwardArgs?: boolean;
 }
 

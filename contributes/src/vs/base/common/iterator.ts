@@ -5,7 +5,7 @@
 
 export namespace Iterable {
 
-	const _empty: Iterable<any> = Object.freeze([]);
+	const _empty: Iterable<unknown> = Object.freeze([]);
 	export function empty<T = any>(): Iterable<T> {
 		return _empty;
 	}

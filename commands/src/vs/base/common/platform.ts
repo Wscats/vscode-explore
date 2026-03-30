@@ -38,7 +38,7 @@ export interface INodeProcess {
 	cwd(): string;
 }
 declare const process: INodeProcess;
-declare const global: any;
+declare const global: unknown;
 
 interface INavigator {
 	userAgent: string;
@@ -46,7 +46,7 @@ interface INavigator {
 	maxTouchPoints?: number;
 }
 declare const navigator: INavigator;
-declare const self: any;
+declare const self: unknown;
 
 const _globals = (typeof self === 'object' ? self : typeof global === 'object' ? global : {} as any);
 
@@ -177,10 +177,10 @@ export const locale = _locale;
  */
 export const translationsConfigFile = _translationsConfigFile;
 
-export const globals: any = _globals;
+export const globals: unknown = _globals;
 
 interface ISetImmediate {
-	(callback: (...args: any[]) => void): void;
+	(callback: (...args: unknown[]) => void): void;
 }
 
 export const setImmediate: ISetImmediate = (function defineSetImmediate() {
@@ -219,7 +219,7 @@ export const setImmediate: ISetImmediate = (function defineSetImmediate() {
 		return nodeProcess.nextTick.bind(nodeProcess);
 	}
 	const _promise = Promise.resolve();
-	return (callback: (...args: any[]) => void) => _promise.then(callback);
+	return (callback: (...args: unknown[]) => void) => _promise.then(callback);
 })();
 
 export const enum OperatingSystem {

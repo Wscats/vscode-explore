@@ -33,7 +33,7 @@ interface Command {
 const Commands: Command[] = [];
 
 function command(commandId: string, options: CommandOptions = {}): Function {
-    return (_target: any, key: string, descriptor: any) => {
+    return (_target: unknown, key: string, descriptor: unknown) => {
         if (!(typeof descriptor.value === 'function')) {
             throw new Error('not supported');
         }
@@ -43,7 +43,7 @@ function command(commandId: string, options: CommandOptions = {}): Function {
 
 // 使用 CommandCenter 收集所有的命令并统一注册
 export class CommandCenter {
-    private disposables: any[];
+    private disposables: unknown[];
     constructor() {
         this.disposables = Commands.map(({ commandId, key, method, options }) => {
             // 统一注册

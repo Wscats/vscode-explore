@@ -8,21 +8,21 @@ import { URI, UriComponents } from './uri';
 /**
  * @returns whether the provided parameter is a JavaScript Array or not.
  */
-export function isArray(array: any): array is any[] {
+export function isArray(array: unknown): array is any[] {
 	return Array.isArray(array);
 }
 
 /**
  * @returns whether the provided parameter is a JavaScript String or not.
  */
-export function isString(str: any): str is string {
+export function isString(str: unknown): str is string {
 	return (typeof str === 'string');
 }
 
 /**
  * @returns whether the provided parameter is a JavaScript Array and each element in the array is a string.
  */
-export function isStringArray(value: any): value is string[] {
+export function isStringArray(value: unknown): value is string[] {
 	return Array.isArray(value) && (<any[]>value).every(elem => isString(elem));
 }
 
@@ -31,7 +31,7 @@ export function isStringArray(value: any): value is string[] {
  * @returns whether the provided parameter is of type `object` but **not**
  *	`null`, an `array`, a `regexp`, nor a `date`.
  */
-export function isObject(obj: any): obj is Object {
+export function isObject(obj: unknown): obj is Object {
 	// The method can't do a type cast since there are type (like strings) which
 	// are subclasses of any put not positvely matched by the function. Hence type
 	// narrowing results in wrong results.
@@ -46,33 +46,33 @@ export function isObject(obj: any): obj is Object {
  * In **contrast** to just checking `typeof` this will return `false` for `NaN`.
  * @returns whether the provided parameter is a JavaScript Number or not.
  */
-export function isNumber(obj: any): obj is number {
+export function isNumber(obj: unknown): obj is number {
 	return (typeof obj === 'number' && !isNaN(obj));
 }
 
 /**
  * @returns whether the provided parameter is a JavaScript Boolean or not.
  */
-export function isBoolean(obj: any): obj is boolean {
+export function isBoolean(obj: unknown): obj is boolean {
 	return (obj === true || obj === false);
 }
 
 /**
  * @returns whether the provided parameter is undefined.
  */
-export function isUndefined(obj: any): obj is undefined {
+export function isUndefined(obj: unknown): obj is undefined {
 	return (typeof obj === 'undefined');
 }
 
 /**
  * @returns whether the provided parameter is undefined or null.
  */
-export function isUndefinedOrNull(obj: any): obj is undefined | null {
+export function isUndefinedOrNull(obj: unknown): obj is undefined | null {
 	return (isUndefined(obj) || obj === null);
 }
 
 
-export function assertType(condition: any, type?: string): asserts condition {
+export function assertType(condition: unknown, type?: string): asserts condition {
 	if (!condition) {
 		throw new Error(type ? `Unexpected type, expected '${type}'` : 'Unexpected type');
 	}
@@ -116,7 +116,7 @@ const hasOwnProperty = Object.prototype.hasOwnProperty;
 /**
  * @returns whether the provided parameter is an empty JavaScript Object or not.
  */
-export function isEmptyObject(obj: any): obj is any {
+export function isEmptyObject(obj: unknown): obj is any {
 	if (!isObject(obj)) {
 		return false;
 	}
@@ -133,27 +133,27 @@ export function isEmptyObject(obj: any): obj is any {
 /**
  * @returns whether the provided parameter is a JavaScript Function or not.
  */
-export function isFunction(obj: any): obj is Function {
+export function isFunction(obj: unknown): obj is Function {
 	return (typeof obj === 'function');
 }
 
 /**
  * @returns whether the provided parameters is are JavaScript Function or not.
  */
-export function areFunctions(...objects: any[]): boolean {
+export function areFunctions(...objects: unknown[]): boolean {
 	return objects.length > 0 && objects.every(isFunction);
 }
 
 export type TypeConstraint = string | Function;
 
-export function validateConstraints(args: any[], constraints: Array<TypeConstraint | undefined>): void {
+export function validateConstraints(args: unknown[], constraints: Array<TypeConstraint | undefined>): void {
 	const len = Math.min(args.length, constraints.length);
 	for (let i = 0; i < len; i++) {
 		validateConstraint(args[i], constraints[i]);
 	}
 }
 
-export function validateConstraint(arg: any, constraint: TypeConstraint | undefined): void {
+export function validateConstraint(arg: unknown, constraint: TypeConstraint | undefined): void {
 
 	if (isString(constraint)) {
 		if (typeof arg !== constraint) {
@@ -197,7 +197,7 @@ export function getAllMethodNames(obj: object): string[] {
 	return methods;
 }
 
-export function createProxyObject<T extends object>(methodNames: string[], invoke: (method: string, args: any[]) => any): T {
+export function createProxyObject<T extends object>(methodNames: string[], invoke: (method: string, args: unknown[]) => any): T {
 	const createProxyMethod = (method: string): () => any => {
 		return function () {
 			const args = Array.prototype.slice.call(arguments, 0);
@@ -207,7 +207,7 @@ export function createProxyObject<T extends object>(methodNames: string[], invok
 
 	let result = {} as T;
 	for (const methodName of methodNames) {
-		(<any>result)[methodName] = createProxyMethod(methodName);
+		(<unknown>result)[methodName] = createProxyMethod(methodName);
 	}
 	return result;
 }
@@ -235,7 +235,7 @@ export type AddFirstParameterToFunctions<Target, TargetFunctionsReturnType, Firs
 	[K in keyof Target]:
 
 	// Function: add param to function
-	Target[K] extends (...args: any) => TargetFunctionsReturnType ? (firstArg: FirstParameter, ...args: Parameters<Target[K]>) => ReturnType<Target[K]> :
+	Target[K] extends (...args: unknown) => TargetFunctionsReturnType ? (firstArg: FirstParameter, ...args: Parameters<Target[K]>) => ReturnType<Target[K]> :
 
 	// Else: just leave as is
 	Target[K]
@@ -261,10 +261,10 @@ export type Dto<T> = { [K in keyof T]: T[K] extends URI
 
 
 export function NotImplementedProxy<T>(name: string): { new(): T } {
-	return <any>class {
+	return <unknown>class {
 		constructor() {
 			return new Proxy({}, {
-				get(target: any, prop: PropertyKey) {
+				get(target: unknown, prop: PropertyKey) {
 					if (target[prop]) {
 						return target[prop];
 					}
